@@ -157,6 +157,8 @@ El modelo de la base de datos deberá tener las siguientes entidades (Aquellas p
   - Fecha de lanzamiento
   - Rating
   - Plataformas *
+
+  
 - [ ] Genero con las siguientes propiedades:
   - ID
   - Nombre
