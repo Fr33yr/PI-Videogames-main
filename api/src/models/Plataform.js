@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
 
-    sequelize.define('genre', {
-        id:{
+    sequelize.define('plataform', {
+        id: {
             type: DataTypes.UUID,
             primaryKey: true,
             allowNull: false,
@@ -13,5 +13,5 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-    },{timestamps: false});
+    }, { timestamps: false });
 }
