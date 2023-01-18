@@ -25,10 +25,6 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
-    plataforms: {
-      type: DataTypes.ARRAY(Sequelize.STRING),
-      allowNull: false
-    },
     created:{
       type: DataTypes.BOOLEAN,
       allowNull: false
