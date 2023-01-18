@@ -3,14 +3,15 @@ const axios = require('axios')
 const { API_KEY } = process.env
 
 const getApiGenres = async () => {
-    const genresApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-    genresApi.data.results.forEach(async (g) => {
-        await Genre.findOrCreate({
-            where: {
-                name: g.name
-            }
-        })
-    })
+    const allGenres = await Genre.findAll()
+    if (!allGenres.length) {
+        const genresAPI = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
+        const genres = genresAPI.data.results
+
+        Genre.bulkCreate(genres.map(p => ({
+            name: p.name
+        })))
+    }
 }
 
 const getAllGenres = async () => {
