@@ -1,6 +1,5 @@
 const { Videogame, Genre, Plataforms } = require('../db')
 const axios = require('axios')
-const { Op } = require('sequelize')
 const { API_KEY } = process.env
 
 const getDbGames = async () => {
@@ -14,19 +13,28 @@ const getDbGames = async () => {
 
 const getAPIGames = async () => {
     try {
-        const nPages = 5
-        let urls = []
-        for (let i = 1; i < nPages + 1; i++) {
-            urls.push(`https://api.rawg.io/api/games?key=${API_KEY}=${i}`)
-        }
+        let apiGames = []
+        const url1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=50`)
+        const url2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=50`)
+        const url3 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=50`)
 
-        const promiseUrls = urls.map((url) => axios.get(url))
-        const apiGames = []
-        Promise.all(promiseUrls).then((responses) => {
-            responses.forEach(async (response) => {
-                apiGames.push(response.data.results)
+        apiGames = url1.data.results && url1.data.results.concat(
+            url2.data.results,
+            url3.data.results
+        )
+
+        // clear api data
+        apiGames = apiGames.map((game) => {
+            const platforms = game.platforms.map((p) => p.platform.name)
+            return {
+                id: game.id,
+                name: game.name,
+                image: game.background_image,
+                genres: game.genres,
+                platforms: platforms,
+                rating: game.rating,
+                released: game.released,
             }
-            )
         })
 
         return apiGames
@@ -39,7 +47,7 @@ const getAllGames = async () => {
     const apiData = await getAPIGames()
     const dbData = await getDbGames()
 
-    return apiData.concat(dbData)
+    return apiData
 }
 
 const getGamesByName = async (name) => {
@@ -50,7 +58,7 @@ const getGamesByName = async (name) => {
 }
 
 const getGameById = async (id) => {
-    const game = await axios.get(`https://api.rawg.io/api/games/${id}?key=aee41211e4cb421b803adaa84d40cf3e`)
+    const game = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
 
     return game.data
 }
@@ -68,20 +76,20 @@ const createGame = async (props) => {
 
         // relacion entre las tablas
         const dbGenre = await Genre.findAll({
-            where: {name: genres}
+            where: { name: genres }
         })
 
         const dbPlataforms = await Plataforms.findAll({
-            where: {name: plataforms}
+            where: { name: plataforms }
         })
 
         newGame.addGenres(dbGenre)
         newGame.addPlataforms(dbPlataforms)
 
-        res.status(201).json({message: "Success!"})
+        res.status(201).json({ message: "Success!" })
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message })
     }
 }
 
-module.exports = { getAllGames, getGameById, getGamesByName, createGame }
+module.exports = { getAllGames, getGameById, getGamesByName, createGame, getAPIGames }
