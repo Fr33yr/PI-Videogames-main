@@ -1,8 +1,8 @@
-const { getAllPlataforms } = require('../controllers/plataformContollers')
+const { getAllPlatforms } = require('../controllers/plataformContollers')
 
 const Allplataforms = async (req, res) => {
     try {
-        const results = await getAllPlataforms()
+        const results = await getAllPlatforms()
 
         res.status(200).json(results)
     } catch (error) {
