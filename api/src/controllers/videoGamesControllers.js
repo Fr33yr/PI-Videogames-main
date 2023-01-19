@@ -48,14 +48,13 @@ const getAllGames = async () => {
     const apiData = await getAPIGames()
     const dbData = await getDbGames()
 
-    return apiData
+    return apiData.concat(dbData)
 }
 
 const getGamesByName = async (name) => {
-    const apiData = await getAPIGames()
-    const dbData = await getDbGames()
-
-    return apiData.concat(dbData).find(game => game.name.includes(name))
+    const allGames = await getAllGames()
+    
+    return allGames.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()))
 }
 
 const getGameById = async (id) => {

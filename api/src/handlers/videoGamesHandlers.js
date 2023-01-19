@@ -1,10 +1,19 @@
-const { getAllGames, getGamesByName, getGameById, createGame, getAPIGames } = require('../controllers/videoGamesControllers')
+const { getAllGames, getGamesByName, getGameById, createGame } = require('../controllers/videoGamesControllers')
 
 const getAll = async (req, res) => {
-    const { name } = req.params
+    const { name } = req.query
+    
+    console.log(name);
     try {
-        const results = name ? await getGamesByName() : await getAllGames()
+        if(name){
+            const results =  await getGamesByName(name)
+            
         res.status(200).json(results)
+        }else{
+            const results = await getAllGames()
+            
+        res.status(200).json(results)
+        }
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
