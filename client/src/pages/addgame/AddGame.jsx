@@ -1,11 +1,9 @@
 import styles from './addgame.module.css'
 
-function AddGame() {
+export default function AddGame() {
   return (
     <>
     
     </>
   )
 }
-
-export default AddGame

@@ -1,11 +1,9 @@
 import styles from './videogames.module.css'
 
-function Videogames() {
+export default function Videogames() {
   return (
     <>
     
     </>
   )
 }
-
-export default Videogames

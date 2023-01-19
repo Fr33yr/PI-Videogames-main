@@ -1,11 +1,9 @@
 import styles from './detail.module.css'
 
-function Detail() {
+export default function Detail() {
   return (
     <>
     
     </>
   )
 }
-
-export default Detail

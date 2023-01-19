@@ -1,7 +1,8 @@
-import { Footer } from './footer/Footer'
-import { Nav } from './nav/Nav'
+import Footer from './footer/Footer'
+import Nav from './nav/Nav'
 
-function Layout(children) {
+export default function Layout(props) {
+    const { children } = props
     return (
         <>
             <Nav></Nav>
@@ -10,5 +11,3 @@ function Layout(children) {
         </>
     )
 }
-
-export default Layout
