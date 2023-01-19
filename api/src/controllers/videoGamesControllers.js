@@ -1,6 +1,7 @@
 const { Videogame, Genre, Platform } = require('../db')
 const axios = require('axios')
 const { Op } = require('sequelize')
+const { dataFormatter } = require('../utils/dataFormater')
 const { API_KEY } = process.env
 
 const getDbGames = async () => {
@@ -24,6 +25,17 @@ const getAPIGames = async () => {
             url3.data.results
         )
 
+        const urls = [
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=40`,
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=40`,
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=20`
+        ]
+
+        const response = await Promise.all(urls.map((url) => axios.get(url)))
+        .then(res => res.map(obj => obj.data.results).flat())
+        //.then(res => res.reduce( (acc, element) => acc = [ ...acc, ...element.data.results], []))
+
+
         // clear api data
         apiGames = apiGames.map((game) => {
             const platforms = game.platforms.map((p) => p.platform.name)
@@ -38,7 +50,7 @@ const getAPIGames = async () => {
             }
         })
 
-        return apiGames
+        return dataFormatter(response)
     } catch (error) {
         console.log(error)
     }
