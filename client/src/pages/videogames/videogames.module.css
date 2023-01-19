@@ -1,0 +1,4 @@
+.videogames{
+    display: flex;
+    flex-direction: row;
+}
