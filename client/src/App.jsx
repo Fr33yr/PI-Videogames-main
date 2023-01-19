@@ -1,5 +1,5 @@
 import { Home, Detail, AddGame, Videogames } from '../src/pages/index'
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Layout } from '../src/components/index'
 
 function App() {
