@@ -1,11 +1,9 @@
 import styles from './home.module.css'
 
-function Home() {
+export default function Home() {
   return (
     <>
 
     </>
   )
 }
-
-export default Home
