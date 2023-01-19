@@ -1,6 +1,6 @@
 import styles from './videogames.module.css'
 
-function Videgames() {
+function Videogames() {
   return (
     <>
     
@@ -8,4 +8,4 @@ function Videgames() {
   )
 }
 
-export default Videgames
+export default Videogames
