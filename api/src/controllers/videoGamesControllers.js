@@ -1,5 +1,6 @@
-const { Videogame, Genre, Plataforms } = require('../db')
+const { Videogame, Genre, Platform } = require('../db')
 const axios = require('axios')
+const { Op } = require('sequelize')
 const { API_KEY } = process.env
 
 const getDbGames = async () => {
@@ -65,9 +66,9 @@ const getGameById = async (id) => {
 
 const createGame = async (props) => {
     const { name, genres, description, releaseDate,
-        rating, plataforms, created
+        rating, platforms, created, image
     } = props
-
+console.log(props);
     try {
         const newGame = await Videogame.create({
             name, description, releaseDate, image,
@@ -75,20 +76,32 @@ const createGame = async (props) => {
         })
 
         // relacion entre las tablas
+        const genreOptions = []
+        for(let i = 0; i < genres.length; i++){
+            genreOptions.push({
+                id: genres[i]
+            })
+        }
         const dbGenre = await Genre.findAll({
-            where: { name: genres }
+            where: { [Op.or]: genreOptions },
+            include: Videogame
         })
 
-        const dbPlataforms = await Plataforms.findAll({
-            where: { name: plataforms }
+        const platformOptions = []
+        for(let i = 0; i < platforms.length; i++){
+            platformOptions.push({
+                id: platforms[i]
+            })
+        }
+        const dbPlatforms = await Platform.findAll({
+            where: { [Op.or]: platformOptions },
+            include: Videogame
         })
 
         newGame.addGenres(dbGenre)
-        newGame.addPlataforms(dbPlataforms)
-
-        res.status(201).json({ message: "Success!" })
+        newGame.addPlatforms(dbPlatforms)
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        console.log(error);
     }
 }
 

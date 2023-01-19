@@ -22,9 +22,10 @@ const getById = async (req, res) => {
     }
 }
 
-const createNewGame = async (props) => {
+const createNewGame = async (req, res) => { 
+
     try {
-        createGame(props)
+        createGame(req.body)
         res.status(201).send({message: 'Success!'})
     } catch (error) {
         res.status(400).send({error: error.message})
