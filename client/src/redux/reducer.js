@@ -1,8 +1,8 @@
 import {
     GET_GAMES, GET_DETAILS, ERROR,
     CREATE_GAME, SORTING,
-    FILTER_BY_GENRE,
-    FILTER_BY_PLATFORM, RESET_ERROR, RESET_GAMES
+    FILTER_BY_GENRE, RESET_GAMES,
+    FILTER_BY_PLATFORM, RESET_ERROR,
 } from './actions.types'
 
 const initialState = {
@@ -87,10 +87,31 @@ export default (state = initialState, action) => {
 
             }
         case FILTER_BY_PLATFORM:
-            return {
-
+            if (action.payload !== 'all') {
+                return {
+                    ...state,
+                    gamesCopy: state.games.slice().filter(
+                        game => game.platform === action.payload.toLowerCase()
+                    )
+                }
+            } else {
+                return {
+                    ...state,
+                    gamesCopy: [...state.games]
+                }
             }
-
+        case ERROR: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case RESET_ERROR:
+            return {
+                ...state,
+                error: initialState.error
+            }
+            
         default:
             return {
                 ...state
