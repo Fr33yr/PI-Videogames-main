@@ -65,26 +65,12 @@ const createGame = async (props) => {
         })
 
         // relacion entre las tablas
-        const genreOptions = []
-        for(let i = 0; i < genres.length; i++){
-            genreOptions.push({
-                id: genres[i]
-            })
-        }
-        const dbGenre = await Genre.findAll({
-            where: { [Op.or]: genreOptions },
-            include: Videogame
+        let dbGenre = await Genre.findAll({
+            where: {name: genres}
         })
 
-        const platformOptions = []
-        for(let i = 0; i < platforms.length; i++){
-            platformOptions.push({
-                id: platforms[i]
-            })
-        }
-        const dbPlatforms = await Platform.findAll({
-            where: { [Op.or]: platformOptions },
-            include: Videogame
+        let dbPlatforms = await Platform.findAll({
+            where: {name: platforms}
         })
 
         newGame.addGenres(dbGenre)
