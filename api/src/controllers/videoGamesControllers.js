@@ -15,15 +15,6 @@ const getDbGames = async () => {
 
 const getAPIGames = async () => {
     try {
-        let apiGames = []
-        const url1 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=50`)
-        const url2 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=50`)
-        const url3 = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=50`)
-
-        apiGames = url1.data.results && url1.data.results.concat(
-            url2.data.results,
-            url3.data.results
-        )
 
         const urls = [
             `https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=40`,
@@ -34,21 +25,6 @@ const getAPIGames = async () => {
         const response = await Promise.all(urls.map((url) => axios.get(url)))
         .then(res => res.map(obj => obj.data.results).flat())
         //.then(res => res.reduce( (acc, element) => acc = [ ...acc, ...element.data.results], []))
-
-
-        // clear api data
-        apiGames = apiGames.map((game) => {
-            const platforms = game.platforms.map((p) => p.platform.name)
-            return {
-                id: game.id,
-                name: game.name,
-                image: game.background_image,
-                genres: game.genres,
-                platforms: platforms,
-                rating: game.rating,
-                released: game.released,
-            }
-        })
 
         return dataFormatter(response)
     } catch (error) {
