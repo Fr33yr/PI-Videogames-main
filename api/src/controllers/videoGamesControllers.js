@@ -6,7 +6,9 @@ const { API_KEY } = process.env
 
 const getDbGames = async () => {
     try {
-        const allgames = await Videogame.findAll()
+        const allgames = await Videogame.findAll({
+            include: [Genre, Platform]
+        })
         return allgames
     } catch (error) {
         console.log(error)
@@ -55,7 +57,7 @@ const createGame = async (props) => {
     const { name, genres, description, releaseDate,
         rating, platforms, created, image
     } = props
-console.log(props);
+
     try {
         const newGame = await Videogame.create({
             name, description, releaseDate, image,
