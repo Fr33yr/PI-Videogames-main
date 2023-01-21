@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+
 import { CardsContainer, Filters, Pagination } from '../../components/index'
 import { usePaginate } from '../../hooks/usePaginate'
 import styles from './videogames.module.css'
