@@ -13,11 +13,11 @@ function Pagination({ currentPage, setCurrentPage, nPages }) {
                 <button onClick={() => setCurrentPage(prevPage)} disabled={currentPage === 0 || nPages === 0}>{"<="}</button>
                 {/* === Page numbers === */}
                 <p>{prevPage >= 0 ? prevPage : ""}</p>
-                <p className={styles.currentPage}>{currentIndex}</p>
+                <p className={styles.currentPage}>{currentPage}</p>
                 <p>{nextPage > nPages || nPages === 0 ? "" : nextPage}</p>
                 {/* === Page buttons === */}
                 <button onClick={() => setCurrentPage(nextPage)} disabled={currentPage === nPages || nPages === 0}>{"=>"}</button>
-                <button onClick={() => setCurrentPage(nPages)} disabled={nPages === 0 || currentIndex === nPages}>last</button>
+                <button onClick={() => setCurrentPage(nPages)} disabled={nPages === 0 || currentPage === nPages}>last</button>
             </div>
         </>
     )
