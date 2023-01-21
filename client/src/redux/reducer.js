@@ -3,6 +3,7 @@ import {
     CREATE_GAME, SORTING,
     FILTER_BY_GENRE, RESET_GAMES,
     FILTER_BY_PLATFORM, RESET_ERROR,
+    FILTER_BY_ORIGIN
 } from './actions.types'
 
 const initialState = {
@@ -83,8 +84,18 @@ export default (state = initialState, action) => {
                 }
             }
         case FILTER_BY_GENRE:
-            return {
-
+            if (action.payload !== 'all') {
+                return {
+                    ...state,
+                    gamesCopy: state.games.slice().filter(
+                        game => game.genre === action.payload.toLowerCase()
+                    )
+                }
+            } else {
+                return {
+                    ...state,
+                    gamesCopy: [...state.games]
+                }
             }
         case FILTER_BY_PLATFORM:
             if (action.payload !== 'all') {
@@ -98,6 +109,19 @@ export default (state = initialState, action) => {
                 return {
                     ...state,
                     gamesCopy: [...state.games]
+                }
+            }
+        case FILTER_BY_ORIGIN:
+            if(action.payload === true){
+                return{
+                    ...state,
+                    gamesCopy: state.games.slice().filter(
+                        game => game.created === true
+                    )
+                }
+            }else{
+                return{
+                    ...state,
                 }
             }
         case ERROR: {

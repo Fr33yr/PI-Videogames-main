@@ -1,9 +1,10 @@
 import axios from 'axios'
 import {
-    GET_GAMES, GET_DETAILS, ERROR, 
-    CREATE_GAME, SORTING, 
-    FILTER_BY_GENRE, 
-    FILTER_BY_PLATFORM, RESET_ERROR
+    GET_GAMES, GET_DETAILS, ERROR,
+    CREATE_GAME, SORTING,
+    FILTER_BY_GENRE,
+    FILTER_BY_PLATFORM, RESET_ERROR,
+    FILTER_BY_ORIGIN
 } from './actions.types'
 
 
@@ -79,7 +80,14 @@ const filterBy = (genre, platform) => {
         }
     }
 }
-z
+
+const filterByOrigin = (payload) => {
+    return {
+        type: FILTER_BY_ORIGIN,
+        payload
+    }
+}
+
 const sortBy = (payload) => {
     return {
         type: SORTING,
@@ -95,4 +103,8 @@ const resetErrors = () => {
     }
 }
 
-export { getAllGames, getGameById, createGame, filterBy, sortBy }
+export {
+    getAllGames, getGameById,
+    createGame, filterBy, sortBy,
+    filterByOrigin, resetErrors
+}
