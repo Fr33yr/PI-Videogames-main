@@ -2,3 +2,21 @@
     display: flex;
     flex-direction: row;
 }
+
+.pagination button{
+    margin: 0 .4rem;
+    padding: .2rem .5rem;
+    background-color: transparent;
+    border: 2px solid var(--font-clr-complementary);
+    border-radius: 2px;
+}
+
+.pagination button:hover{
+    cursor: pointer;
+    background-color: gainsboro;
+}
+
+.pagination p {
+    margin: 0 .4rem;
+    text-align: center;
+}
