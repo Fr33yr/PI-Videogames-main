@@ -1,5 +1,6 @@
 export { default as DetailBtn } from './buttons/detailbtn/DetailBtn';
 export { default as Card } from './card/Card';
+export { default as CardsContainer } from './cardscontainer/CardsContainer';
 export { default as Filters } from './filters/Filters';
 export { default as Layout } from './layout/Layout';
 export { default as Footer } from './layout/footer/Footer';
