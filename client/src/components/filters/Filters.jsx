@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
+import { getAllGames } from '../../redux/actions'
 import styles from './filters.module.css'
 
 export default function Filters() {
@@ -20,6 +21,14 @@ export default function Filters() {
   const { platforms } = usePaltforms()
   const { genres } = useGenres()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (search.name === '') {
+      dispatch(getAllGames())
+    } else {
+      dispatch(getAllGames(search.name))
+    }
+  }, [search.name])
 
   // === Handlers ===
   const handleChange = (e) => {
