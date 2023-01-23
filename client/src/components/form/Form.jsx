@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './form.module.css'
-import { resetErrors } from '../../redux/actions'
+import { resetErrors } from '../../redux/actions/errorActions'
+import { createGame } from '../../redux/actions/gamesActions'
 import { useGenres, usePaltforms } from '../../hooks/index'
 
 function Form() {
@@ -17,7 +18,7 @@ function Form() {
         genres: [],
         platforms: []
     }
-    const [formValues, setFormValues] = useState
+    const [formValues, setFormValues] = useState({ ...formValuesInitialState })
     const { genres } = useGenres()
     const { platforms } = usePaltforms()
 
@@ -34,7 +35,7 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(resetErrors())
-        console.table(formValues);
+        dispatch(createGame({ ...formValues }))
         setFormValues({ ...formValuesInitialState })
     }
 
@@ -43,11 +44,12 @@ function Form() {
             <form action="" onSubmit={handleSubmit} className={styles.creationform}>
                 {/* === Name input === */}
                 <label htmlFor="">Name</label>
-                <input type="text" name="name" onChange={handleChange} />
+                <input type="text" name="name" onChange={handleChange}
+                    autoComplete='off' />
                 {/* === Description input */}
                 <label htmlFor="">Description</label>
                 <textarea name="description" id="" cols="30" rows="10"
-                    onChange={handleChange}></textarea>
+                    onChange={handleChange} autoComplete='off'></textarea>
                 {/* === Release date ===*/}
                 <label htmlFor="">Release date</label>
                 <input type="date" name="releaseDate" onChange={handleChange} />
@@ -70,7 +72,7 @@ function Form() {
                 <select name="platforms" onChange={handleChange}>
                     {platforms && platforms.map((p) => (
                         <>
-                            <option value={p.name} key={g.id}>{g.name}</option>
+                            <option value={p.name} key={p.id}>{p.name}</option>
                         </>
                     ))}
                 </select>

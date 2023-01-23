@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux'
 
 import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
-import { getAllGames } from '../../redux/actions'
+import { getAllGames } from '../../redux/actions/gamesActions'
+import {sortBy, filterBy, filterByOrigin} from '../../redux/actions/filterActions'
 import styles from './filters.module.css'
 
 export default function Filters() {
