@@ -3,7 +3,7 @@ import styles from './nav.module.css'
 function Nav() {
   return (
     <>
-        <nav>
+        <nav className={styles.navbar}>
             Nav
         </nav>
     </>

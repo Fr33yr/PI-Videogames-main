@@ -1,0 +1,6 @@
+.filters{
+    max-width: 10vw;
+    margin: 0 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+}

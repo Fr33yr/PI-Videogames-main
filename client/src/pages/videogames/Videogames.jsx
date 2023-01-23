@@ -18,7 +18,7 @@ export default function Videogames() {
       <div className={styles.videogames}>
         <Filters />
         <div className={styles.cards}>
-          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} nPages={pages.length - 1}/>
           <CardsContainer games={pages[currentPage]} />
           <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </div>

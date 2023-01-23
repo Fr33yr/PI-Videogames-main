@@ -1,0 +1,11 @@
+.detailbtn{
+    margin-top: .5rem;
+    border: 2px solid var(--font-clr-complementary);
+    max-width: fit-content;
+    padding: .2rem .2rem;
+    border-radius: 2px;
+}
+
+.detailbtn:hover{
+    background-color: var(--font-clr-complementary);
+}
