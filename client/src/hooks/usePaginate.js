@@ -5,7 +5,7 @@
 
 export function usePaginate(arr, cardsPerPage, firstPageCards) {
     if (arr.length <= firstPageCards || arr.length <= cardsPerPage) {
-        let pages = arr
+        let pages = [...arr]
         return {pages}
     }
     else if (cardsPerPage === firstPageCards) {

@@ -5,10 +5,10 @@ export function usePaltforms(url) {
     const [platforms, setPlatforms] = useState([])
 
     useEffect(()=>{
-        axios.get(`http://localhost:3001/platforms`)
+        !platforms.length ? axios.get(`http://localhost:3001/platforms`)
         .then(res => setPlatforms(res.data))
-        .catch(err => console.log(err))
-    },[])
+        .catch(err => console.log(err)) : ""
+    },[platforms])
 
     return { 
         platforms, 
