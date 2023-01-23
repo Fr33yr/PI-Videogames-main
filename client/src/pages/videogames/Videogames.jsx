@@ -19,7 +19,7 @@ export default function Videogames() {
         <Filters />
         <div className={styles.cards}>
           <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} nPages={pages.length - 1}/>
-          <CardsContainer games={pages[currentPage]} />
+          {Array.isArray(pages[0]) ? <CardsContainer games={pages[currentPage]}/> : <CardsContainer games={pages}/>}
           <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
         </div>
       </div>
