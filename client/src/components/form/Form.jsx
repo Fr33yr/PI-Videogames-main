@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './form.module.css'
 import { resetErrors } from '../../redux/actions/errorActions'
 import { createGame } from '../../redux/actions/gamesActions'
-import { useGenres, usePaltforms } from '../../hooks/index'
+import { useGenres, usePaltforms, useValidate } from '../../hooks/index'
 
 function Form() {
     // === Local state ===
