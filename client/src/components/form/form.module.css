@@ -1,0 +1,4 @@
+.creationform{
+    display: flex;
+    flex-direction: column;
+}
