@@ -8,7 +8,10 @@ function Nav() {
         <nav className={styles.navbar}>
             <ul>
               <li>
-                <Link to={'/addgame'}>Add new game</Link>
+                <Link to={'addgame'}>Add new game</Link>
+              </li>
+              <li>
+                <Link to={'games'}>Games</Link>
               </li>
             </ul>
         </nav>
