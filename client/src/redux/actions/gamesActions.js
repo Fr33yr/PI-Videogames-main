@@ -30,22 +30,24 @@ const getAllGames = (name) => {
 }
 
 const getGameById = (id) => {
-    axios.get(`http://localhost:3001/game/${id}`)
-        .then(res => res.data)
-        .then(d => dispatch({
-            type: GET_DETAILS,
-            payload: d
-        }))
-        .catch(err => {
-            dispatch({
-                type: ERROR,
-                payload: err.data
+    return async function (dispatch) {
+        axios.get(`http://localhost:3001/games/${id}`)
+            .then(res => res.data)
+            .then(d => dispatch({
+                type: GET_DETAILS,
+                payload: d
+            }))
+            .catch(err => {
+                dispatch({
+                    type: ERROR,
+                    payload: err.data
+                })
             })
-        })
+    }
 }
 
 const createGame = (props) => {
-    return async function () {
+    return async function (dispatch) {
         axios.post(`http://localhost:3001/games/`, props)
             .then(res => res.data)
             .then(d => dispatch({
@@ -61,4 +63,4 @@ const createGame = (props) => {
     }
 }
 
-export {createGame, getAllGames, getGameById}
+export { createGame, getAllGames, getGameById }
