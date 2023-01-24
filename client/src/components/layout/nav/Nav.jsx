@@ -1,11 +1,15 @@
-import {Link} from 'react-router-dom'
+import { Link, useLocation, } from 'react-router-dom'
 
 import styles from './nav.module.css'
 
 function Nav() {
+  let location = useLocation()
+
   return (
     <>
-        <nav className={styles.navbar}>
+      <nav className={styles.navbar}>
+        {location.pathname === '/' ? "" :
+          <>
             <ul>
               <li>
                 <Link to={'addgame'}>Add new game</Link>
@@ -14,7 +18,8 @@ function Nav() {
                 <Link to={'games'}>Games</Link>
               </li>
             </ul>
-        </nav>
+          </>}
+      </nav>
     </>
   )
 }
