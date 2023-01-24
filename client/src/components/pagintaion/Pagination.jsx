@@ -9,7 +9,7 @@ function Pagination({ currentPage, setCurrentPage, nPages }) {
         <>
             <div className={styles.pagination}>
                 {/* === Page buttons === */}
-                <button onClick={() => setCurrentPage(0)} disabled={nPages === 0 || currentPage}>first</button>
+                <button onClick={() => setCurrentPage(0)} disabled={nPages === 0 || currentPage === 0}>first</button>
                 <button onClick={() => setCurrentPage(prevPage)} disabled={currentPage === 0 || nPages === 0}>{"<="}</button>
                 {/* === Page numbers === */}
                 <p>{prevPage >= 0 ? prevPage : ""}</p>
