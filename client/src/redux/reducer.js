@@ -69,11 +69,11 @@ export default (state = initialState, action) => {
             } else {
                 return {
                     ...state,
-                    gamesCopy: [...state.games]
+                    gamesCopy: state.games
                 }
             }
         case FILTER_BY_ORIGIN:
-            if(action.payload === true){
+            if(action.payload === 'true'){
                 return{
                     ...state,
                     gamesCopy: [...state.games].filter(
@@ -83,6 +83,7 @@ export default (state = initialState, action) => {
             }else{
                 return{
                     ...state,
+                    gamesCopy: state.games
                 }
             }
         case ERROR: {
