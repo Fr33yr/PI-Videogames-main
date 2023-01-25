@@ -5,19 +5,29 @@
 
 export function Paginate(arr, cardsPerPage, firstPageCards) {
     if (arr.length <= firstPageCards || arr.length <= cardsPerPage) {
-        return arr
-    } else {
+        let pages = [...arr]
+        return pages
+    }
+    else if (cardsPerPage === firstPageCards) {
+        let pages = [] // array de cartas cortado en paginas
+        for (let i = 0; i < arr.length; i += cardsPerPage) {
+            const slicedPage = arr.slice(i, i + cardsPerPage)
+            pages.push(slicedPage)
+        }
+        return pages
+    }
+    else {
         let fisrtPage = [] // array de cartas que corresponde a la primer pagina
         for (let i = 0; i < firstPageCards; i++) {
             fisrtPage.push(arr[i])
         }
-        let slicedArr = [] // array de cartas cortado en paginas
+        let pages = [] // array de cartas cortado en paginas
         for (let i = 0; i < arr.length; i += cardsPerPage) {
             const slicedPage = arr.slice(i, i + cardsPerPage)
-            slicedArr.push(slicedPage)
+            pages.push(slicedPage)
         }
-        slicedArr[0] = fisrtPage // reemplaza el primer elemento del array con la primer pagina
+        pages[0] = fisrtPage // reemplaza el primer elemento del array con la primer pagina
 
-        return slicedArr
+        return pages
     }
 }

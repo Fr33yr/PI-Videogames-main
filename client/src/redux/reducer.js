@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
         case GET_GAMES:
             return {
                 ...state,
-                games: [...action.payload],
+                games: action.payload,
                 gamesCopy: [...action.payload]
             }
         case RESET_GAMES:
@@ -40,47 +40,51 @@ export default (state = initialState, action) => {
             }
         case SORTING:
             if (action.payload === 'Z to A' || action.payload === 'za') {
+                let cbaSort = state.gamesCopy.slice().sort(function (a, b) {
+                    if (a.name < b.name) {
+                        return 1;
+                    }
+                    if (a.name > b.name) {
+                        return -1;
+                    }
+                    return 0;
+                })
                 return {
                     ...state,
-                    gamesCopy: state.gamesCopy.slice().sort(function (a, b) {
-                        if (a.name < b.name) {
-                            return 1;
-                        }
-                        if (a.name > b.name) {
-                            return -1;
-                        }
-                        return 0;
-                    })
+                    gamesCopy: cbaSort
                 }
             }
             else if (action.payload === 'A to Z' || action.payload === 'az') {
+                let abcSort = state.gamesCopy.slice().sort(function (a, b) {
+                    if (a.name < b.name) {
+                        return -1;
+                    }
+                    if (a.name > b.name) {
+                        return 1;
+                    }
+                    return 0;
+                })
                 return {
                     ...state,
-                    gamesCopy: state.gamesCopy.slice().sort(function (a, b) {
-                        if (a.name < b.name) {
-                            return -1;
-                        }
-                        if (a.name > b.name) {
-                            return 1;
-                        }
-                        return 0;
-                    })
+                    gamesCopy: abcSort
                 }
             }
             else if (action.payload === 'highRating') {
+                let high = state.gamesCopy.slice().sort(function (a, b) {
+                    return b.rating - a.rating
+                })
                 return {
                     ...state,
-                    gamesCopy: state.gamesCopy.slice().sort(function (a, b) {
-                        return b.rating - a.rating
-                    })
+                    gamesCopy: high
                 }
             }
             else if (action.payload === 'lowRating') {
+                let low = state.gamesCopy.slice().sort(function (a, b) {
+                    return a.rating - b.rating
+                })
                 return {
                     ...state,
-                    gamesCopy: state.gamesCopy.slice().sort(function (a, b) {
-                        return a.rating - b.rating
-                    })
+                    gamesCopy: low
                 }
             }
         case FILTER_BY_GENRE:
@@ -94,7 +98,7 @@ export default (state = initialState, action) => {
             } else {
                 return {
                     ...state,
-                    gamesCopy: [...state.games]
+                    gamesCopy: state.games
                 }
             }
         case FILTER_BY_PLATFORM:
@@ -137,8 +141,6 @@ export default (state = initialState, action) => {
             }
             
         default:
-            return {
-                ...state
-            }
+            return state
     }
 }

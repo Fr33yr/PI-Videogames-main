@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { CardsContainer, Filters, Pagination } from '../../components/index'
-import { usePaginate } from '../../hooks/usePaginate'
+import { Paginate } from '../../utils/paginate'
 import styles from './videogames.module.css'
 
 export default function Videogames() {
@@ -11,7 +11,7 @@ export default function Videogames() {
   const [currentPage, setCurrentPage] = useState(0)
 
   const games = useSelector(state => state.gamesCopy)
-  let { pages } = usePaginate(games, 15, 15)
+  let pages = Paginate(games, 15, 15)
 
   return (
     <>

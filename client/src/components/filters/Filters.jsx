@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
 import { getAllGames } from '../../redux/actions/gamesActions'
-import {sortBy, filterBy, filterByOrigin} from '../../redux/actions/filterActions'
+import { sortBy, filterBy, filterByOrigin } from '../../redux/actions/filterActions'
 import styles from './filters.module.css'
 
 export default function Filters() {
@@ -23,6 +23,8 @@ export default function Filters() {
   const { genres } = useGenres()
   const dispatch = useDispatch()
 
+  const games = useSelector(state => state.gamesCopy)
+
   useEffect(() => {
     if (search.name === '') {
       dispatch(getAllGames())
@@ -30,6 +32,16 @@ export default function Filters() {
       dispatch(getAllGames(search.name))
     }
   }, [search.name])
+
+  useEffect(() => {
+    if (search.sortBy) {
+      dispatch(sortBy(search.sortBy))
+    } else if (search.filterBy) {
+      dispatch(filterBy(search.filterBy))
+    } else if (search.isCreated) {
+      dispatch(filterByOrigin(search.isCreated))
+    }
+  }, [search])
 
   // === Handlers ===
   const handleChange = (e) => {
@@ -69,7 +81,7 @@ export default function Filters() {
           {sortOptions.map((o, index) => (
             <>
               <label htmlFor="">{o}</label>
-              <input type="radio" name="sort" value={o} key={index + 1} />
+              <input type="radio" name="sortBy" value={o} key={index + 1} />
             </>
           ))}
         </fieldset>

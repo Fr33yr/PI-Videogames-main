@@ -7,7 +7,7 @@ export default function Card(props) {
     return (
         <>
             <div className={styles.card}>
-                <img src={image ? "" : ""} alt="" />
+                <img src={image ? image : "image not not found"} alt="" width={180} height={200}/>
                 <h3>{name}</h3>
                 <div className="">
                     <h4>genre:</h4>
