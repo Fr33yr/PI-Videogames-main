@@ -5,6 +5,7 @@ import {
     FILTER_BY_PLATFORM, RESET_ERROR,
     FILTER_BY_ORIGIN
 } from './actions.types'
+import {orderBy} from '../utils/orderBy'
 
 const initialState = {
     games: [],
@@ -39,53 +40,9 @@ export default (state = initialState, action) => {
                 formData: action.payload
             }
         case SORTING:
-            if (action.payload === 'Z to A' || action.payload === 'za') {
-                let cbaSort = [...state.gamesCopy].sort(function (a, b) {
-                    if (a.name < b.name) {
-                        return 1;
-                    }
-                    if (a.name > b.name) {
-                        return -1;
-                    }
-                    return 0;
-                })
-                return {
-                    ...state,
-                    gamesCopy: cbaSort
-                }
-            }
-            else if (action.payload === 'A to Z' || action.payload === 'az') {
-                let abcSort = [...state.gamesCopy].sort(function (a, b) {
-                    if (a.name < b.name) {
-                        return -1;
-                    }
-                    if (a.name > b.name) {
-                        return 1;
-                    }
-                    return 0;
-                })
-                return {
-                    ...state,
-                    gamesCopy: abcSort
-                }
-            }
-            else if (action.payload === 'highRating') {
-                let high = [...state.gamesCopy].sort(function (a, b) {
-                    return b.rating - a.rating
-                })
-                return {
-                    ...state,
-                    gamesCopy: high
-                }
-            }
-            else if (action.payload === 'lowRating') {
-                let low = [...state.gamesCopy].sort(function (a, b) {
-                    return a.rating - b.rating
-                })
-                return {
-                    ...state,
-                    gamesCopy: low
-                }
+            return {
+                ...state,
+                gamesCopy: orderBy([...state.gamesCopy], action.payload)
             }
         case FILTER_BY_GENRE:
             if (action.payload !== 'all') {
