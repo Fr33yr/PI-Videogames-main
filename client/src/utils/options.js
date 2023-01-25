@@ -1,3 +1,3 @@
-const sortOptions = ['A to Z', 'Z to A', 'highRating', 'lowRating']
+const sortOptions = ['Az', 'Za', 'high', 'low']
 
 export {sortOptions}
