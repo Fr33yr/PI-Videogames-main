@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
             }
         case SORTING:
             if (action.payload === 'Z to A' || action.payload === 'za') {
-                let cbaSort = state.gamesCopy.slice().sort(function (a, b) {
+                let cbaSort = [...state.gamesCopy].sort(function (a, b) {
                     if (a.name < b.name) {
                         return 1;
                     }
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
                 }
             }
             else if (action.payload === 'A to Z' || action.payload === 'az') {
-                let abcSort = state.gamesCopy.slice().sort(function (a, b) {
+                let abcSort = [...state.gamesCopy].sort(function (a, b) {
                     if (a.name < b.name) {
                         return -1;
                     }
@@ -70,7 +70,7 @@ export default (state = initialState, action) => {
                 }
             }
             else if (action.payload === 'highRating') {
-                let high = state.gamesCopy.slice().sort(function (a, b) {
+                let high = [...state.gamesCopy].sort(function (a, b) {
                     return b.rating - a.rating
                 })
                 return {
@@ -79,7 +79,7 @@ export default (state = initialState, action) => {
                 }
             }
             else if (action.payload === 'lowRating') {
-                let low = state.gamesCopy.slice().sort(function (a, b) {
+                let low = [...state.gamesCopy].sort(function (a, b) {
                     return a.rating - b.rating
                 })
                 return {
@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
             if (action.payload !== 'all') {
                 return {
                     ...state,
-                    gamesCopy: state.games.slice().filter(
+                    gamesCopy: [...state.games].filter(
                         game => game.genre === action.payload.toLowerCase()
                     )
                 }
@@ -105,7 +105,7 @@ export default (state = initialState, action) => {
             if (action.payload !== 'all') {
                 return {
                     ...state,
-                    gamesCopy: state.games.slice().filter(
+                    gamesCopy: [...state.games].filter(
                         game => game.platform === action.payload.toLowerCase()
                     )
                 }
@@ -119,7 +119,7 @@ export default (state = initialState, action) => {
             if(action.payload === true){
                 return{
                     ...state,
-                    gamesCopy: state.games.slice().filter(
+                    gamesCopy: [...state.games].filter(
                         game => game.created === true
                     )
                 }
