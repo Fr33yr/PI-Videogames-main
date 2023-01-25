@@ -19,9 +19,9 @@ const getAPIGames = async () => {
     try {
 
         const urls = [
-            `https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=40`,
-            `https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=40`,
-            `https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=20`
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=1&page_size=50`,
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=2&page_size=50`,
+            `https://api.rawg.io/api/games?key=${API_KEY}&page=3&page_size=50`
         ]
 
         const response = await Promise.all(urls.map((url) => axios.get(url)))
