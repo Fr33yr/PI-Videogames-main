@@ -3,9 +3,12 @@ import {
     CREATE_GAME, SORTING,
     FILTER_BY_GENRE, RESET_GAMES,
     FILTER_BY_PLATFORM, RESET_ERROR,
-    FILTER_BY_ORIGIN
+    FILTER_BY_ORIGIN, RESET_FILTERS,
+    FILTER_BY_GENRE_N_PLATFORM,
+    FILTER_BY
 } from './actions.types'
-import {orderBy} from '../utils/orderBy'
+import { orderBy } from '../utils/orderBy'
+import { filterBy } from '../utils/filterBy'
 
 const initialState = {
     games: [],
@@ -44,47 +47,29 @@ export default (state = initialState, action) => {
                 ...state,
                 gamesCopy: orderBy([...state.gamesCopy], action.payload)
             }
-        case FILTER_BY_GENRE:
-            if (action.payload !== 'all') {
-                return {
-                    ...state,
-                    gamesCopy: [...state.games].filter(
-                        game => game.genre === action.payload.toLowerCase()
-                    )
-                }
-            } else {
-                return {
-                    ...state,
-                    gamesCopy: state.games
-                }
-            }
-        case FILTER_BY_PLATFORM:
-            if (action.payload !== 'all') {
-                return {
-                    ...state,
-                    gamesCopy: [...state.games].filter(
-                        game => game.platform === action.payload.toLowerCase()
-                    )
-                }
-            } else {
-                return {
-                    ...state,
-                    gamesCopy: state.games
-                }
+        case FILTER_BY:
+            return{
+                ...state,
+                gamesCopy: filterBy([...state.games], action.payload)
             }
         case FILTER_BY_ORIGIN:
-            if(action.payload === 'true'){
-                return{
+            if (action.payload === 'true') {
+                return {
                     ...state,
                     gamesCopy: [...state.games].filter(
                         game => game.created === true
                     )
                 }
-            }else{
-                return{
+            } else {
+                return {
                     ...state,
                     gamesCopy: state.games
                 }
+            }
+        case RESET_FILTERS:
+            return {
+                ...state,
+                gamesCopy: state.games
             }
         case ERROR: {
             return {
@@ -97,7 +82,7 @@ export default (state = initialState, action) => {
                 ...state,
                 error: initialState.error
             }
-            
+
         default:
             return state
     }
