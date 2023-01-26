@@ -5,7 +5,7 @@ const dataFormatter = (arr) => {
             id: game.id,
             name: game.name,
             image: game.background_image,
-            genres: game.genres,
+            genres: game.genres.map(g => g.name),
             platforms: platforms,
             rating: game.rating,
             released: game.released,
