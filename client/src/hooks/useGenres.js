@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export function useGenres() {
-    const [genres, setGenres] = useState([])
+    const [genresOptions, setGenresOptions] = useState([])
 
     useEffect(() => {
-        !genres.length? axios.get(`http://localhost:3001/genres`)
-        .then(res => setGenres(res.data))
+        !genresOptions.length? axios.get(`http://localhost:3001/genres`)
+        .then(res => setGenresOptions(res.data))
         .catch(err => console.log(err)) : ""
-    }, [genres])
+    }, [genresOptions])
 
     return {
-        genres,
+        genresOptions,
     }
 }

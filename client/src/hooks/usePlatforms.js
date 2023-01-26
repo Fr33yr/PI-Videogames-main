@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export function usePaltforms(url) {
-    const [platforms, setPlatforms] = useState([])
+export function usePaltforms() {
+    const [platformsOptions, setPlatformsOptions] = useState([])
 
     useEffect(()=>{
-        !platforms.length ? axios.get(`http://localhost:3001/platforms`)
-        .then(res => setPlatforms(res.data))
+        !platformsOptions.length ? axios.get(`http://localhost:3001/platforms`)
+        .then(res => setPlatformsOptions(res.data))
         .catch(err => console.log(err)) : ""
-    },[platforms])
+    },[platformsOptions])
 
     return { 
-        platforms, 
+        platformsOptions, 
     }
 }
