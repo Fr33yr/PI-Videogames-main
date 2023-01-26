@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
 import { getAllGames } from '../../redux/actions/gamesActions'
-import { sortBy, filterBy, filterByOrigin } from '../../redux/actions/filterActions'
+import { sortBy, filterBy, filterByOrigin, resetFilters } from '../../redux/actions/filterActions'
 import styles from './filters.module.css'
 
 export default function Filters() {
   // === Local State ===
   const searchInitialState = {
     name: '',
-    platform: '',
-    genre: '',
+    platform: 'All',
+    genre: 'All',
     sortBy: '',
     filterBy: '',
     isCreated: false
@@ -36,8 +36,8 @@ export default function Filters() {
   useEffect(() => {
     if (search.sortBy) {
       dispatch(sortBy(search.sortBy))
-    } else if (search.filterBy) {
-      dispatch(filterBy(search.filterBy))
+    } else if (search.genre || search.platform) {
+      dispatch(filterBy(search.genre, search.platform))
     } else if (search.isCreated) {
       dispatch(filterByOrigin(search.isCreated))
     }
@@ -48,6 +48,11 @@ export default function Filters() {
     const value = e.target.value
     const name = e.target.name
     setSearch(values => ({ ...values, [name]: value }))
+  }
+
+  const handleReset = () => {
+    setSearch(searchInitialState)
+    dispatch(resetFilters())
   }
 
   return (
@@ -91,7 +96,7 @@ export default function Filters() {
         <input type="checkbox" name="isCreated" value={!search.isCreated}
           onChange={handleChange} checked={search.isCreated} />
 
-        <button onClick={() => setSearch(searchInitialState)}>Reset</button>
+        <button onClick={handleReset}>Reset</button>
       </div>
     </>
   )
