@@ -1,24 +1,18 @@
 import {
-    SORTING,
-    FILTER_BY_GENRE,
-    FILTER_BY_PLATFORM, 
-    FILTER_BY_ORIGIN
+    SORTING, FILTER_BY_ORIGIN,
+    RESET_FILTERS,
+    FILTER_BY_GENRE_N_PLATFORM,
 } from '../actions.types'
 
 
 // === Filter actions ===
 
 const filterBy = (genre, platform) => {
-    if (genre) {
-        return {
-            type: FILTER_BY_GENRE,
-            payload: genre
-        }
-    }
-    if (platform) {
-        return {
-            type: FILTER_BY_PLATFORM,
-            payload: platform
+    return{
+        type: FILTER_BY_GENRE_N_PLATFORM,
+        payload:{
+            genre,
+            platform
         }
     }
 }
@@ -37,4 +31,9 @@ const sortBy = (payload) => {
     }
 }
 
-export {filterBy, filterByOrigin, sortBy}
+const resetFilters = () => {
+    return {
+        type: RESET_FILTERS
+    }
+}
+export { filterBy, filterByOrigin, sortBy, resetFilters }

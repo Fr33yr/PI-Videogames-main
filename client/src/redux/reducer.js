@@ -1,11 +1,9 @@
 import {
     GET_GAMES, GET_DETAILS, ERROR,
-    CREATE_GAME, SORTING,
-    FILTER_BY_GENRE, RESET_GAMES,
-    FILTER_BY_PLATFORM, RESET_ERROR,
-    FILTER_BY_ORIGIN, RESET_FILTERS,
+    CREATE_GAME, SORTING, RESET_GAMES,
+    RESET_ERROR, FILTER_BY_ORIGIN,
+    RESET_FILTERS,
     FILTER_BY_GENRE_N_PLATFORM,
-    FILTER_BY
 } from './actions.types'
 import { orderBy } from '../utils/orderBy'
 import { filterBy } from '../utils/filterBy'
@@ -47,8 +45,8 @@ export default (state = initialState, action) => {
                 ...state,
                 gamesCopy: orderBy([...state.gamesCopy], action.payload)
             }
-        case FILTER_BY:
-            return{
+        case FILTER_BY_GENRE_N_PLATFORM:
+            return {
                 ...state,
                 gamesCopy: filterBy([...state.games], action.payload)
             }
