@@ -1,4 +1,6 @@
+export { default as DeleteBtn } from './buttons/deletebtn/DeleteBtn';
 export { default as DetailBtn } from './buttons/detailbtn/DetailBtn';
+export { default as EditBtn } from './buttons/editbtn/EditBtn';
 export { default as Card } from './card/Card';
 export { default as CardsContainer } from './cardscontainer/CardsContainer';
 export { default as Filters } from './filters/Filters';
