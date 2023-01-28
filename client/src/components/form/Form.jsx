@@ -19,8 +19,9 @@ function Form() {
         platforms: []
     }
     const [formValues, setFormValues] = useState({ ...formValuesInitialState })
-    const { genres } = useGenres()
-    const { platforms } = usePaltforms()
+
+    const { genresOptions } = useGenres()
+    const { platformsOptions } = usePaltforms()
 
     const dispatch = useDispatch()
 
@@ -32,10 +33,26 @@ function Form() {
         setFormValues(values => ({ ...values, [name]: value }))
     }
 
+    const handleAddGenre = (e) => {
+        const value = e.target.value
+        setFormValues({
+            ...formValues,
+            genres: [...formValues.genres, value]
+        })
+    }
+
+    const handleAddPlatform = (e) => {
+        const value = e.target.value
+        setFormValues({
+            ...formValues,
+            platforms: [...formValues.platforms, value]
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(resetErrors())
-        dispatch(createGame({ ...formValues }))
+        //dispatch(resetErrors())
+        //dispatch(createGame({ ...formValues, genres, platforms }))
         setFormValues({ ...formValuesInitialState })
     }
 
@@ -61,24 +78,25 @@ function Form() {
                 <input type="number" name="rating" max={5} min={0}
                     onChange={handleChange} />
                 {/* === Genres === */}
-                <select name="genres" onChange={handleChange}>
-                    {genres && genres.map((g) => (
-                        <>
-                            <option value={g.name} key={g.id}>{g.name}</option>
-                        </>
+                <label htmlFor="">Genre</label>
+                <select onChange={handleAddGenre} defaultValue={'--- choose genres ---'}>
+                    <option value="--- choose genres ---" disabled={true}>--- choose genres ---</option>
+                    {genresOptions && genresOptions.map((g) => (
+                        <option value={g.name} key={g.id}>{g.name}</option>
                     ))}
                 </select>
                 {/* === Platforms === */}
-                <select name="platforms" onChange={handleChange}>
-                    {platforms && platforms.map((p) => (
-                        <>
-                            <option value={p.name} key={p.id}>{p.name}</option>
-                        </>
+                <label htmlFor="">Platform</label>
+                <select onChange={handleAddPlatform} defaultValue={'--- choose platforms ---'}>
+                    <option value="--- choose platforms ---" disabled={true}>--- choose platforms ---</option>
+                    {platformsOptions && platformsOptions.map((p) => (
+                        <option value={p.name} key={p.id}>{p.name}</option>
                     ))}
                 </select>
 
                 <button type="submit">Create</button>
             </form>
+
         </>
     )
 }
