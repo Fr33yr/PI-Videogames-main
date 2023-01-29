@@ -1,5 +1,6 @@
 import {
     RESET_ERROR,
+    RESET_RESPONSE
 } from '../actions.types'
 
 // === Errors ===
@@ -10,4 +11,10 @@ const resetErrors = () => {
     }
 }
 
-export {resetErrors}
+const clearResponse = () => {
+    return{
+        type: RESET_RESPONSE
+    }
+}
+
+export {resetErrors, clearResponse}

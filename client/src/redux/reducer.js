@@ -2,7 +2,7 @@ import {
     GET_GAMES, GET_DETAILS, ERROR,
     CREATE_GAME, SORTING, RESET_GAMES,
     RESET_ERROR, FILTER_BY_ORIGIN,
-    RESET_FILTERS,
+    RESET_FILTERS, RESET_RESPONSE,
     FILTER_BY_GENRE_N_PLATFORM,
 } from './actions.types'
 import { orderBy } from '../utils/orderBy'
@@ -79,6 +79,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: initialState.error
+            }
+        case RESET_RESPONSE:
+            return{
+                ...state,
+                formData: {message: ''}
             }
 
         default:
