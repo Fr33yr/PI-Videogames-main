@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './form.module.css'
@@ -92,11 +92,13 @@ function Form() {
 
                 {/* === Rating === */}
                 <label htmlFor="">Rating</label>
+                {errors.rating && <h4>{errors.rating}</h4>}
                 <input type="number" name="rating" max={5} min={0}
                     onChange={handleChange} value={formValues.rating} />
 
                 {/* === Genres === */}
                 <label htmlFor="">Genre</label>
+                {errors.genres && <h4>{errors.genres}</h4>}
                 <select onChange={handleAddGenre} value={formValues.genres.length === 0 ? '--- choose genres ---' :
                     formValues.genres.length}>
                     <option value="--- choose genres ---" disabled={true}>--- choose genres ---</option>
@@ -107,6 +109,7 @@ function Form() {
 
                 {/* === Platforms === */}
                 <label htmlFor="">Platform</label>
+                {errors.platforms && <h4>{errors.platforms}</h4>}
                 <select onChange={handleAddPlatform} value={formValues.platforms.length === 0 ? '--- choose platforms ---' :
                     formValues.platforms.length} >
                     <option value="--- choose platforms ---" disabled={true}>--- choose platforms ---</option>
