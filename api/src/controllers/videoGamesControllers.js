@@ -64,6 +64,16 @@ const createGame = async (props) => {
             rating: rating || 1, created
         })
 
+        const checkDuplicate = await Videogame.findOne({
+            where: {
+                name
+            }
+        })
+
+        if(checkDuplicate !== null){
+            throw new Error('A game with that name already exists.')
+        }
+
         // relacion entre las tablas
         let dbGenre = await Genre.findAll({
             where: {name: genres}
@@ -76,7 +86,10 @@ const createGame = async (props) => {
         newGame.addGenres(dbGenre)
         newGame.addPlatforms(dbPlatforms)
     } catch (error) {
-        console.log(error);
+        if(error.message === 'A game with that name already exists.'){
+            return res.status(409).json({ message: error.message})
+        }
+        return res.status(500).json({ message: error.message})
     }
 }
 
