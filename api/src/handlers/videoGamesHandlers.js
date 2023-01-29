@@ -32,7 +32,6 @@ const getById = async (req, res) => {
 }
 
 const createNewGame = async (req, res) => { 
-
     try {
         createGame(req.body)
         res.status(201).send({message: 'Success!'})
