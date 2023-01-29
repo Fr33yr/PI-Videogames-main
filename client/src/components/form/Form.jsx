@@ -80,11 +80,13 @@ function Form() {
 
                 {/* === Release date ===*/}
                 <label htmlFor="">Release date</label>
-                {errors.releaseDate}
+                {errors.releaseDate && <h4>{errors.releaseDate}</h4>}
                 <input type="date" name="releaseDate" onChange={handleChange}
                     value={formValues.releaseDate} />
+                    
                 {/* === Image === */}
                 <label htmlFor="">Image url</label>
+                {errors.image && <h4>{errors.image}</h4>}
                 <input type="text" name='image' onChange={handleChange}
                     value={formValues.image} />
 
@@ -113,7 +115,7 @@ function Form() {
                     ))}
                 </select>
 
-                <button type="submit">Create</button>
+                <button type="submit" >Create</button>
             </form>
 
         </>
