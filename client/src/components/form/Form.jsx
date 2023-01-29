@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import styles from './form.module.css'
 import { resetErrors } from '../../redux/actions/errorActions'
 import { createGame } from '../../redux/actions/gamesActions'
-import { useGenres, usePaltforms } from '../../hooks/index'
-import { validate } from '../../utils/validate'
-import {Name, Desciption, Date, Image, Rating} from '../../components/index'
+import {Name, Desciption, Date, Image, Rating, Genres, Platforms} from '../../components/index'
 
 function Form() {
     // === Local state ===
@@ -22,9 +20,6 @@ function Form() {
     }
     const [formValues, setFormValues] = useState({ ...formValuesInitialState })
     const [errors, setErrors] = useState({})
-
-    const { genresOptions } = useGenres()
-    const { platformsOptions } = usePaltforms()
 
     const dispatch = useDispatch()
 
@@ -87,24 +82,12 @@ function Form() {
                     errors={errors} setErrors={setErrors}/>
 
                 {/* === Genres === */}
-                <label htmlFor="">Genre</label>
-                <select onChange={handleAddGenre} value={formValues.genres.length === 0 ? '--- choose genres ---' :
-                    formValues.genres.length}>
-                    <option value="--- choose genres ---" disabled={true}>--- choose genres ---</option>
-                    {genresOptions && genresOptions.map((g) => (
-                        <option value={g.name} key={g.id} >{g.name}</option>
-                    ))}
-                </select>
+                <Genres formValues={formValues} handleAddGenre={handleAddGenre}
+                    errors={errors} setErrors={setErrors}/>
 
                 {/* === Platforms === */}
-                <label htmlFor="">Platform</label>
-                <select onChange={handleAddPlatform} value={formValues.platforms.length === 0 ? '--- choose platforms ---' :
-                    formValues.platforms.length} >
-                    <option value="--- choose platforms ---" disabled={true}>--- choose platforms ---</option>
-                    {platformsOptions && platformsOptions.map((p) => (
-                        <option value={p.name} key={p.id}>{p.name}</option>
-                    ))}
-                </select>
+                <Platforms formValues={formValues} handleAddPlatform={handleAddPlatform}
+                    errors={errors} setErrors={setErrors}/>
 
                 <button type="submit" >Create</button>
             </form>
