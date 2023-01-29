@@ -6,6 +6,7 @@ import { resetErrors } from '../../redux/actions/errorActions'
 import { createGame } from '../../redux/actions/gamesActions'
 import { useGenres, usePaltforms } from '../../hooks/index'
 import { validate } from '../../utils/validate'
+import {Name, Desciption, Date, Image, Rating} from '../../components/index'
 
 function Form() {
     // === Local state ===
@@ -20,13 +21,13 @@ function Form() {
         platforms: []
     }
     const [formValues, setFormValues] = useState({ ...formValuesInitialState })
+    const [errors, setErrors] = useState({})
 
     const { genresOptions } = useGenres()
     const { platformsOptions } = usePaltforms()
-    let errors = validate(formValues)
 
     const dispatch = useDispatch()
-    
+
 
     // === Handlers === 
     const handleChange = (e) => {
@@ -38,19 +39,19 @@ function Form() {
     const handleAddGenre = (e) => {
         const value = e.target.value
         !formValues.genres.includes(value) &&
-        setFormValues({
-            ...formValues,
-            genres: [...formValues.genres, value]
-        })
+            setFormValues({
+                ...formValues,
+                genres: [...formValues.genres, value]
+            })
     }
 
     const handleAddPlatform = (e) => {
         const value = e.target.value
         !formValues.platforms.includes(value) &&
-        setFormValues({
-            ...formValues,
-            platforms: [...formValues.platforms, value]
-        })
+            setFormValues({
+                ...formValues,
+                platforms: [...formValues.platforms, value]
+            })
     }
 
     const handleSubmit = (e) => {
@@ -66,39 +67,27 @@ function Form() {
         <>
             <form action="" onSubmit={handleSubmit} className={styles.creationform}>
                 {/* === Name input === */}
-                <label htmlFor="">Name</label>
-                {errors.name && <h3>{errors.name}</h3>}
-                <input type="text" name="name" onChange={handleChange}
-                    autoComplete='off' value={formValues.name} />
+                <Name formValues={formValues} handleChange={handleChange}
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Description input */}
-                <label htmlFor="">Description</label>
-                {errors.description && <h3>{errors.description}</h3>}
-                <textarea name="description" cols="30" rows="10"
-                    onChange={handleChange} autoComplete='off'
-                    value={formValues.description}></textarea>
+                <Desciption formValues={formValues} handleChange={handleChange}
+                    errors={errors} setErrors={setErrors}/>
 
                 {/* === Release date ===*/}
-                <label htmlFor="">Release date</label>
-                {errors.releaseDate && <h4>{errors.releaseDate}</h4>}
-                <input type="date" name="releaseDate" onChange={handleChange}
-                    value={formValues.releaseDate} />
-                    
+                <Date formValues={formValues} handleChange={handleChange}
+                    errors={errors} setErrors={setErrors}/>
+
                 {/* === Image === */}
-                <label htmlFor="">Image url</label>
-                {errors.image && <h4>{errors.image}</h4>}
-                <input type="text" name='image' onChange={handleChange}
-                    value={formValues.image} />
+                <Image formValues={formValues} handleChange={handleChange}
+                    errors={errors} setErrors={setErrors}/>
 
                 {/* === Rating === */}
-                <label htmlFor="">Rating</label>
-                {errors.rating && <h4>{errors.rating}</h4>}
-                <input type="number" name="rating" max={5} min={0}
-                    onChange={handleChange} value={formValues.rating} />
+                <Rating formValues={formValues} handleChange={handleChange}
+                    errors={errors} setErrors={setErrors}/>
 
                 {/* === Genres === */}
                 <label htmlFor="">Genre</label>
-                {errors.genres && <h4>{errors.genres}</h4>}
                 <select onChange={handleAddGenre} value={formValues.genres.length === 0 ? '--- choose genres ---' :
                     formValues.genres.length}>
                     <option value="--- choose genres ---" disabled={true}>--- choose genres ---</option>
@@ -109,7 +98,6 @@ function Form() {
 
                 {/* === Platforms === */}
                 <label htmlFor="">Platform</label>
-                {errors.platforms && <h4>{errors.platforms}</h4>}
                 <select onChange={handleAddPlatform} value={formValues.platforms.length === 0 ? '--- choose platforms ---' :
                     formValues.platforms.length} >
                     <option value="--- choose platforms ---" disabled={true}>--- choose platforms ---</option>

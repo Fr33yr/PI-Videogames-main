@@ -6,6 +6,7 @@
     --font-clr-primary: #fff;
     --font-clr-secondary: #0D0A0B;
     --font-clr-complementary: #454955;
+    --error-clr: #d40c08;
   
     --h1: clamp(1.4rem, 10vw, 4rem);
     --h2: clamp(1.4rem, 5vw, 2rem);
