@@ -1,23 +1,12 @@
 import styles from '../form.module.css'
 
-function Date({handleChange, formValues, errors, setErrors}) {
-
-    const handleSelect = () => {
-        if(formValues.releaseDate === ''){
-            setErrors({
-                ...errors,
-                releaseDate: 'Date is required'
-            })
-        }else{
-            setErrors({})
-        }
-    }
+function Date({ handleChange, formValues, errors, setErrors }) {
 
     return (
         <>
             <label htmlFor="">Release date</label>
             <input type="date" name="releaseDate" onChange={handleChange}
-                value={formValues.releaseDate} onSelect={handleSelect}/>
+                value={formValues.releaseDate} />
             {errors.releaseDate && <p className={styles.inputerror}>{errors.releaseDate}</p>}
         </>
     )

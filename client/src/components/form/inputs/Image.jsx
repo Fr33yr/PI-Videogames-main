@@ -1,23 +1,12 @@
 import styles from '../form.module.css'
 
-function Image({ handleChange, formValues, errors, setErrors }) {
-
-    const handleSelect = () => {
-        if(!formValues.image){
-            setErrors({
-                ...errors,
-                image: 'Image is required'
-            })
-        }else{
-            setErrors({})
-        }
-    }
+function Image({ handleChange, formValues, errors }) {
 
     return (
         <>
             <label htmlFor="">Image url</label>
             <input type="text" name='image' onChange={handleChange}
-                value={formValues.image} onSelect={handleSelect}/>
+                value={formValues.image}  />
             {errors.image && <p className={styles.inputerror}>{errors.image}</p>}
         </>
     )

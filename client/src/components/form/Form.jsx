@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 import styles from './form.module.css'
 import { resetErrors } from '../../redux/actions/errorActions'
 import { createGame } from '../../redux/actions/gamesActions'
-import {Name, Desciption, Date, Image, Rating, Genres, Platforms} from '../../components/index'
+import { Name, Desciption, Date, Image, Rating, Genres, Platforms } from '../../components/index'
+import { validate } from '../../utils/validate'
 
 function Form() {
     // === Local state ===
@@ -28,7 +29,11 @@ function Form() {
     const handleChange = (e) => {
         const value = e.target.value
         const name = e.target.name
+
         setFormValues(values => ({ ...values, [name]: value }))
+        setErrors(validate({
+            ...formValues, [name]: value
+        }))
     }
 
     const handleAddGenre = (e) => {
@@ -51,7 +56,20 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (Object.keys(errors).length === 0) {
+        if(formValues.genres.length === 0){
+            setErrors({
+                ...errors,
+                genres: 'Choose at least one genre option'
+            })
+        }else if (formValues.platforms.length === 0){
+            setErrors({
+                ...errors,
+                platforms: 'Choose at least one platform option'
+            })
+        }
+        else if (Object.keys(validate(formValues)).length !== 0) {
+            return alert(Object.values(validate(formValues)))
+        } else {
             dispatch(resetErrors())
             dispatch(createGame({ ...formValues }))
             setFormValues({ ...formValuesInitialState })
@@ -67,27 +85,27 @@ function Form() {
 
                 {/* === Description input */}
                 <Desciption formValues={formValues} handleChange={handleChange}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Release date ===*/}
                 <Date formValues={formValues} handleChange={handleChange}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Image === */}
                 <Image formValues={formValues} handleChange={handleChange}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Rating === */}
                 <Rating formValues={formValues} handleChange={handleChange}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Genres === */}
                 <Genres formValues={formValues} handleAddGenre={handleAddGenre}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 {/* === Platforms === */}
                 <Platforms formValues={formValues} handleAddPlatform={handleAddPlatform}
-                    errors={errors} setErrors={setErrors}/>
+                    errors={errors} setErrors={setErrors} />
 
                 <button type="submit" >Create</button>
             </form>
