@@ -21,8 +21,8 @@ export default function Filters() {
   }
 
   const [search, setSearch] = useState(searchInitialState)
-  const { platforms } = usePaltforms()
-  const { genres } = useGenres()
+  const { platformsOptions } = usePaltforms()
+  const { genresOptions } = useGenres()
   const dispatch = useDispatch()
 
   const games = useSelector(state => state.gamesCopy)
@@ -62,13 +62,13 @@ export default function Filters() {
       <div className={styles.filters}>
         {/* === Name input === */}
         <input type="text" name="name" onChange={handleChange}
-          autoComplete='off' value={search.name} />
+          autoComplete='off' value={search.name} placeholder='Videogame...'/>
 
         {/* === Filter by genre === */}
         <label htmlFor="">genre</label>
         <select name="genre" value={search.genre} onChange={handleChange}>
           <option value="All">All</option>
-          {genres && genres.map((g) => (
+          {genresOptions && genresOptions.map((g) => (
             <option key={g.id} value={g.name}>{g.name}</option>
           ))}
         </select>
@@ -77,8 +77,8 @@ export default function Filters() {
         <label htmlFor="">platform</label>
         <select name="platform" value={search.platform} onChange={handleChange}>
           <option value="All">All</option>
-          {platforms && platforms.map((p) => (
-            <option key={p.id} value={p.name}>{p.name}</option>
+          {platformsOptions && platformsOptions.map((p) => (
+            <option key={p.id}  value={p.name}>{p.name}</option>
           ))}
         </select>
 
