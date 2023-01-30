@@ -13,6 +13,20 @@
     margin-bottom: 2rem;
 }
 
+.inputcontainer input{
+    padding: .2rem .1rem;
+    font-size: medium;
+}
+
+.inputcontainer textarea{
+    padding: .2rem .1rem;
+    font-size: medium;
+}
+
+.inputcontainer select{
+    font-size: medium;
+}
+
 .creategamebtn{
     margin: 2rem 0;
     border-radius: 2px;
