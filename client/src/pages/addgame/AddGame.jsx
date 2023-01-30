@@ -10,7 +10,7 @@ export default function AddGame() {
 
   return (
     <>
-      <h2>Add your own game</h2>
+      <h2 >Add your own game</h2>
       {formResponse.message === 'Success!' &&
         <>
           <h3>Game addded successfully!</h3><button onClick={()=>dispatch(clearResponse())}>X</button>

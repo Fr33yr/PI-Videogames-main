@@ -72,7 +72,7 @@ function Form() {
 
     return (
         <>
-            <form action="" onSubmit={handleSubmit} className={styles.creationform}>
+            <form onSubmit={handleSubmit} className={styles.creationform}>
                 {/* === Name input === */}
                 <Name formValues={formValues} handleChange={handleChange}
                     errors={errors} setErrors={setErrors} />
@@ -101,7 +101,7 @@ function Form() {
                 <Platforms formValues={formValues} setFormValues={setFormValues} 
                 handleAddPlatform={handleAddPlatform} errors={errors} />
 
-                <button type="submit" >Create</button>
+                <button type="submit" className={styles.creategamebtn}>Create</button>
             </form>
 
         </>
