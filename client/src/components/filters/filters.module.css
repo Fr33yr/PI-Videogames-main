@@ -1,8 +1,13 @@
 .filters{
     max-width: 10vw;
-    margin: 0 2rem 0 0;
+    margin: 0 3rem 0 0;
     display: flex;
     flex-direction: column;
+}
+
+.checkoption{
+    display: flex;
+    flex-direction: row;
 }
 
 .originbtn{

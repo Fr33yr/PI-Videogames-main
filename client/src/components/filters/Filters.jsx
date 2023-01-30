@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCheck, faXmark} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
@@ -94,11 +94,13 @@ export default function Filters() {
         </fieldset>
 
         {/* === Filter by origin === */}
-        <label htmlFor="">Created</label>
-        {<button onClick={()=>setSearch({
-          ...search,
-          isCreated: !search.isCreated
-        })} className={styles.originbtn}><FontAwesomeIcon icon={search.isCreated? faCheck : faXmark}/></button>}
+        <div className={styles.checkoption}>
+          <label htmlFor="">Created</label>
+          {<button onClick={() => setSearch({
+            ...search,
+            isCreated: !search.isCreated
+          })} className={styles.originbtn}><FontAwesomeIcon icon={search.isCreated ? faCheck : faXmark} /></button>}
+        </div>
 
         <button onClick={handleReset}>Reset</button>
       </div>
