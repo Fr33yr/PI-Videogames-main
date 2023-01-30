@@ -25,7 +25,7 @@ const getAPIGames = async () => {
         ]
 
         const response = await Promise.all(urls.map((url) => axios.get(url)))
-        .then(res => res.map(obj => obj.data.results).flat())
+            .then(res => res.map(obj => obj.data.results).flat())
         //.then(res => res.reduce( (acc, element) => acc = [ ...acc, ...element.data.results], []))
 
         return dataFormatter(response)
@@ -43,7 +43,7 @@ const getAllGames = async () => {
 
 const getGamesByName = async (name) => {
     const allGames = await getAllGames()
-    
+
     return allGames.filter((game) => game.name.toLowerCase().includes(name.toLowerCase()))
 }
 
@@ -64,32 +64,19 @@ const createGame = async (props) => {
             rating: rating || 1, created
         })
 
-        const checkDuplicate = await Videogame.findOne({
-            where: {
-                name
-            }
-        })
-
-        if(checkDuplicate !== null){
-            throw new Error('A game with that name already exists.')
-        }
-
         // relacion entre las tablas
         let dbGenre = await Genre.findAll({
-            where: {name: genres}
+            where: { name: genres }
         })
 
         let dbPlatforms = await Platform.findAll({
-            where: {name: platforms}
+            where: { name: platforms }
         })
 
         newGame.addGenres(dbGenre)
         newGame.addPlatforms(dbPlatforms)
     } catch (error) {
-        if(error.message === 'A game with that name already exists.'){
-            return res.status(409).json({ message: error.message})
-        }
-        return res.status(500).json({ message: error.message})
+        console.log(error)
     }
 }
 
