@@ -1,8 +1,14 @@
 import styles from '../form.module.css'
-import {usePaltforms} from '../../../hooks/index'
+import { usePaltforms } from '../../../hooks/index'
 
-function Platforms({ handleAddPlatform, formValues, errors }) {
+function Platforms({ handleAddPlatform, formValues, setFormValues, errors }) {
     const { platformsOptions } = usePaltforms()
+    const handleRemove = (name) => {
+        setFormValues({
+            ...formValues,
+            platforms: formValues.platforms.filter((p) => p !== name)
+        })
+    }
 
     return (
         <>
@@ -14,6 +20,13 @@ function Platforms({ handleAddPlatform, formValues, errors }) {
                     <option value={p.name} key={p.id}>{p.name}</option>
                 ))}
             </select>
+            <div className={styles.selectedoptions}>
+                {formValues.platforms && formValues.platforms.map((p) => (
+                    <>
+                        <p>{p}</p><button onClick={()=>handleRemove(p)}>X</button>
+                    </>
+                ))}
+            </div>
             {errors.platforms && <p className={styles.inputerror}>{errors.platforms}</p>}
         </>
     )

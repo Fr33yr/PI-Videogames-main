@@ -94,12 +94,12 @@ function Form() {
                     errors={errors} setErrors={setErrors} />
 
                 {/* === Genres === */}
-                <Genres formValues={formValues} handleAddGenre={handleAddGenre}
-                    errors={errors} setErrors={setErrors} />
+                <Genres formValues={formValues} setFormValues={setFormValues}
+                handleAddGenre={handleAddGenre} errors={errors}  />
 
                 {/* === Platforms === */}
-                <Platforms formValues={formValues} handleAddPlatform={handleAddPlatform}
-                    errors={errors} setErrors={setErrors} />
+                <Platforms formValues={formValues} setFormValues={setFormValues} 
+                handleAddPlatform={handleAddPlatform} errors={errors} />
 
                 <button type="submit" >Create</button>
             </form>
