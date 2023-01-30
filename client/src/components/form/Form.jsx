@@ -56,24 +56,18 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(formValues.genres.length === 0){
-            setErrors({
-                ...errors,
-                genres: 'Choose at least one genre option'
-            })
-        }else if (formValues.platforms.length === 0){
-            setErrors({
-                ...errors,
-                platforms: 'Choose at least one platform option'
-            })
-        }
-        else if (Object.keys(validate(formValues)).length !== 0) {
+        if (Object.keys(validate(formValues)).length !== 0) {
             return alert(Object.values(validate(formValues)))
-        } else {
-            dispatch(resetErrors())
-            dispatch(createGame({ ...formValues }))
-            setFormValues({ ...formValuesInitialState })
         }
+        if(formValues.genres.length === 0){
+            return alert('Choose at least one genre option')
+        }
+        if(formValues.platforms.length === 0){
+            return alert('Choose at least one platform option') 
+        }
+        dispatch(resetErrors())
+        dispatch(createGame({ ...formValues }))
+        setFormValues({ ...formValuesInitialState })
     }
 
     return (
