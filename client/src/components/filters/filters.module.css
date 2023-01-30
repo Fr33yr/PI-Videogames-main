@@ -1,8 +1,26 @@
 .filters{
     max-width: 10vw;
-    margin: 0 3rem 0 0;
+    margin: 0 1rem 0 0;
+    padding-right: 2rem;
     display: flex;
     flex-direction: column;
+    border-right: 2px solid var(--font-clr-complementary);
+}
+
+.filters input{
+    margin-bottom: var(--inputs-margin);
+}
+
+.filters select{
+    margin-bottom: var(--inputs-margin);
+}
+
+.filters fieldset{
+    margin-bottom: var(--inputs-margin);
+}
+
+.filters fieldset input{
+   margin: .1rem;
 }
 
 .checkoption{
@@ -11,5 +29,16 @@
 }
 
 .originbtn{
+    width: fit-content;
+    background-color: transparent;
+    margin-left: .5rem;
+}
+
+.originbtn:hover{
+    cursor: pointer;
+}
+
+.filtersreset{
+    margin-top: 2rem;
     width: fit-content;
 }

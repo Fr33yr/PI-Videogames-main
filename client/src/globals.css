@@ -7,7 +7,7 @@
   --font-clr-secondary: #0D0A0B;
   --font-clr-complementary: #454955;
   --error-clr: #d40c08;
-
+  --inputs-margin: 2rem;
   --h1: clamp(1.4rem, 10vw, 4rem);
   --h2: clamp(1.4rem, 5vw, 2rem);
   --h3: clamp(1.2rem, 3vw, 1.5rem)
@@ -31,7 +31,7 @@ body {
 }
 
 main {
-  padding: 4rem 0 0 0;
+  padding: 2rem 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

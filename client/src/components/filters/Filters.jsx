@@ -102,7 +102,7 @@ export default function Filters() {
           })} className={styles.originbtn}><FontAwesomeIcon icon={search.isCreated ? faCheck : faXmark} /></button>}
         </div>
 
-        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleReset} className={styles.filtersreset}>Reset</button>
       </div>
     </>
   )
