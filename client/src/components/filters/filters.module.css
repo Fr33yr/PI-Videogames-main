@@ -9,10 +9,12 @@
 
 .filters input{
     margin-bottom: var(--inputs-margin);
+    font-size: medium;
 }
 
 .filters select{
     margin-bottom: var(--inputs-margin);
+    font-size: medium;
 }
 
 .filters fieldset{
