@@ -9,9 +9,8 @@ export default function Card(props) {
             <div className={styles.card}>
                 <img src={image ? image : "image not not found"} alt="" width={180} height={200}/>
                 <h3>{name}</h3>
-                <div className="">
-                    <h4>genre:</h4>
-                    {genres && genres.map((g) => (<p key={g.id}>{g.name}</p>))}
+                <div >
+                    <p>Genre: {genres && genres.map((g) => (` ${g}`))}</p>
                 </div>
                 <DetailBtn id={id} />
             </div>
