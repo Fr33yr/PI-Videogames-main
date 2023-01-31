@@ -33,27 +33,16 @@ const getById = async (req, res) => {
 }
 
 const createNewGame = async (req, res) => {
-    const { name } = req.body
-    try {
-        const checkDuplicate = await Videogame.findOne({
-            where: {
-                name
-            }
-        })
-
-        if (checkDuplicate !== null) {
-            throw new Error('A game with that name already exists.')
+    createGame(req.body)
+    .then(res => {
+        if(res.errors[0].message === 'name must be unique'){
+            throw new Error('name must be unique')
         }
-
-        createGame(req.body)
-
-        res.status(201).send({ message: 'Success!' })
-    } catch (error) {
-        if (error.message === 'A game with that name already exists.') {
-            res.status(409).send({ error: error.message })
-        }
-        res.status(400).send({ message: error.message })
-    }
+        res.status(201).json({message: 'Success!'})
+    })
+    .catch(err => {
+        res.status(400).json({error: err.message})
+    })
 }
 
 module.exports = { getAll, getById, createNewGame }
