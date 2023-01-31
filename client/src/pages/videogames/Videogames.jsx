@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { CardsContainer, Filters, Loader, Pagination } from '../../components/index'
+import { CardsContainer, Filters, Loader, NetworkError, Pagination } from '../../components/index'
 import { Paginate } from '../../utils/paginate'
 import { resetErrors } from '../../redux/actions/errorActions'
 import styles from './videogames.module.css'
@@ -13,6 +13,7 @@ export default function Videogames() {
   const dispatch = useDispatch()
 
   const games = useSelector(state => state.gamesCopy)
+  const errorState = useSelector (state => state.error)
   let pages = Paginate(games, 15, 15)
 
   useEffect(() => {
@@ -22,13 +23,14 @@ export default function Videogames() {
 
   return (
     <>
-      {loading ? <Loader /> :
+      {loading && !errorState ? <Loader /> :
         <div className={styles.videogames}>
           <Filters />
           <div className={styles.cards}>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
               nPages={Array.isArray(pages[0]) ? pages.length - 1 : 0} />
 
+            {errorState.message === 'Network Error' && <NetworkError />}
             {Array.isArray(pages[0]) ? <CardsContainer games={pages[currentPage]} /> : <CardsContainer games={pages} />}
 
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
