@@ -3,6 +3,7 @@ export { default as DetailBtn } from './buttons/detailbtn/DetailBtn';
 export { default as EditBtn } from './buttons/editbtn/EditBtn';
 export { default as Card } from './card/Card';
 export { default as CardsContainer } from './cardscontainer/CardsContainer';
+export { default as NetworkError } from './errors/NetworkError';
 export { default as Filters } from './filters/Filters';
 export { default as Form } from './form/Form';
 export { default as Date } from './form/inputs/Date';
