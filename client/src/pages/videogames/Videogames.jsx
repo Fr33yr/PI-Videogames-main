@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { CardsContainer, Filters, Loader, Pagination } from '../../components/index'
 import { Paginate } from '../../utils/paginate'
+import { resetErrors } from '../../redux/actions/errorActions'
 import styles from './videogames.module.css'
 
 export default function Videogames() {
   // === Local state ===
   const [currentPage, setCurrentPage] = useState(0)
   const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
 
   const games = useSelector(state => state.gamesCopy)
   let pages = Paginate(games, 15, 15)
 
   useEffect(() => {
+    dispatch(resetErrors())
     !games || games.length === 0 ? setLoading(true) : setLoading(false)
   }, [games])
 
