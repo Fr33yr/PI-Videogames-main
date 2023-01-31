@@ -18,19 +18,23 @@ export default function Detail() {
 
   return (
     <>
-      <h3>id:{params.id}</h3>
-      <h4>{detail.name}</h4>
-      <p>Genres:</p>
-      {detail.genres && detail.genres.map((g, index) => (
-        <p key={index+1}>{g.name}</p>
-      ))}
-      <p>Platforms: </p>
-      {detail.platforms && detail.platforms.map((p, index) => (
-        <p key={index+2}>{p.platform.name}</p>
-      ))}
-      <p>Realesed: {detail.released}</p>
-      <p>{detail.description}</p>
-      <p>rating: {detail.rating}</p>
+      <div className={styles.detailscontainer}>
+        <img src={detail.background_image ? detail.background_image : "Image not found"} alt="" />
+        <h4>{detail.name}</h4>
+        <p>Genres:</p>
+        {detail.genres && detail.genres.map((g, index) => (
+          <p key={index + 1}>{g.name}</p>
+        ))}
+        <p>Platforms: </p>
+        {detail.platforms && detail.platforms.map((p, index) => (
+          <p key={index + 2}>{p.platform.name}</p>
+        ))}
+        <p>Realesed: {detail.released}</p>
+        <>
+          {detail.description}
+        </>
+        <p>rating: {detail.rating}</p>
+      </div>
     </>
   )
 }
