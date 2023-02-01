@@ -40,7 +40,7 @@ const getGameById = (id) => {
             .catch(err => {
                 dispatch({
                     type: ERROR,
-                    payload: err.data
+                    payload: err.data.error
                 })
             })
     }
@@ -55,9 +55,10 @@ const createGame = (props) => {
                 payload: d
             }))
             .catch(err => {
+                let error = err.response.data.error
                 dispatch({
                     type: ERROR,
-                    payload: err.data
+                    payload: error
                 })
             })
     }
