@@ -67,7 +67,7 @@ function Form() {
         }
         dispatch(resetErrors())
         dispatch(createGame({ ...formValues }))
-        setFormValues({ ...formValuesInitialState })
+        //setFormValues({ ...formValuesInitialState })
     }
 
     return (
