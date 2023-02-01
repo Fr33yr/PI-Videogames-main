@@ -33,16 +33,16 @@ const getById = async (req, res) => {
 }
 
 const createNewGame = async (req, res) => {
-    createGame(req.body)
-    .then(res => {
-        if(res.errors[0].message === 'name must be unique'){
-            throw new Error('name must be unique')
+    try {
+        const response = await createGame(req.body)
+        if (response.errors && response.errors[0].message) {
+            throw new Error('name most be unique')
         }
-        res.status(201).json({message: 'Success!'})
-    })
-    .catch(err => {
-        res.status(400).json({error: err.message})
-    })
+        res.status(201).json({ message: 'Succes!' })
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
 }
 
 module.exports = { getAll, getById, createNewGame }

@@ -75,6 +75,9 @@ const createGame = async (props) => {
 
         newGame.addGenres(dbGenre)
         newGame.addPlatforms(dbPlatforms)
+
+        return 'exito'
+
     } catch (error) {
         return error
     }
