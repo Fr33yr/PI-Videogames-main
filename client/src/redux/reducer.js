@@ -4,6 +4,7 @@ import {
     RESET_ERROR, FILTER_BY_ORIGIN,
     RESET_FILTERS, RESET_RESPONSE,
     FILTER_BY_GENRE_N_PLATFORM,
+    GET_GENRES, GET_PLATFORMS
 } from './actions.types'
 import { orderBy } from '../utils/orderBy'
 import { filterBy } from '../utils/filterBy'
@@ -11,6 +12,8 @@ import { filterBy } from '../utils/filterBy'
 const initialState = {
     games: [],
     gamesCopy: [],
+    genres: [],
+    platforms: [],
     details: {},
     formData: {},
     error: {}
@@ -34,6 +37,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 details: action.payload
+            }
+        case GET_PLATFORMS:
+            return{
+                ...state,
+                platforms: action.payload
+            }
+        case GET_GENRES:
+            return{
+                ...state,
+                genres: action.payload
             }
         case CREATE_GAME:
             return {

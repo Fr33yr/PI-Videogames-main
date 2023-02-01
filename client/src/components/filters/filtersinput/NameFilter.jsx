@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { getAllGames } from '../../redux/actions/gamesActions'
+import { getAllGames } from '../../../redux/actions/gamesActions'
 
 function NameFilter({ search, setSearch }) {
     const dispatch = useDispatch()

@@ -1,8 +1,8 @@
+import {useSelector} from 'react-redux'
 import styles from '../form.module.css'
-import { usePaltforms } from '../../../hooks/index'
 
 function Platforms({ handleAddPlatform, formValues, setFormValues, errors }) {
-    const { platformsOptions } = usePaltforms()
+    const platformsOptions = useSelector(state => state.platforms)
     const handleRemove = (name) => {
         setFormValues({
             ...formValues,

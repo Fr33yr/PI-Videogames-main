@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import styles from './form.module.css'
 import { resetErrors } from '../../redux/actions/errorActions'
 import { createGame } from '../../redux/actions/gamesActions'
+import { getPlatforms, getGenres } from '../../redux/actions/filterActions'
 import { Name, Desciption, Date, Image, Rating, Genres, Platforms } from '../../components/index'
 import { validate } from '../../utils/validate'
 
@@ -24,6 +25,10 @@ function Form() {
 
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(getPlatforms())
+        dispatch(getGenres())
+    }, [])
 
     // === Handlers === 
     const handleChange = (e) => {
@@ -59,11 +64,11 @@ function Form() {
         if (Object.keys(validate(formValues)).length !== 0) {
             return alert(Object.values(validate(formValues)))
         }
-        if(formValues.genres.length === 0){
+        if (formValues.genres.length === 0) {
             return alert('Choose at least one genre option')
         }
-        if(formValues.platforms.length === 0){
-            return alert('Choose at least one platform option') 
+        if (formValues.platforms.length === 0) {
+            return alert('Choose at least one platform option')
         }
         dispatch(resetErrors())
         dispatch(createGame({ ...formValues }))
@@ -95,11 +100,11 @@ function Form() {
 
                 {/* === Genres === */}
                 <Genres formValues={formValues} setFormValues={setFormValues}
-                handleAddGenre={handleAddGenre} errors={errors}  />
+                    handleAddGenre={handleAddGenre} errors={errors} />
 
                 {/* === Platforms === */}
-                <Platforms formValues={formValues} setFormValues={setFormValues} 
-                handleAddPlatform={handleAddPlatform} errors={errors} />
+                <Platforms formValues={formValues} setFormValues={setFormValues}
+                    handleAddPlatform={handleAddPlatform} errors={errors} />
 
                 <button type="submit" className={styles.creategamebtn}>Create</button>
             </form>

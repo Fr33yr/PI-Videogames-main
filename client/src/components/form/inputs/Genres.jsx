@@ -1,8 +1,8 @@
+import {useSelector} from 'react-redux'
 import styles from '../form.module.css'
-import { useGenres } from '../../../hooks/index'
 
 function Genres({ handleAddGenre, formValues, setFormValues, errors }) {
-    const { genresOptions } = useGenres()
+    const genresOptions = useSelector(state => state.genres)
     const handleRemove = (name) => {
         setFormValues({
             ...formValues,
