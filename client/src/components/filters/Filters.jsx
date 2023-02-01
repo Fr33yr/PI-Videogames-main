@@ -7,6 +7,7 @@ import { useGenres, usePaltforms } from '../../hooks'
 import { sortOptions } from '../../utils/options'
 import { getAllGames } from '../../redux/actions/gamesActions'
 import { sortBy, filterBy, filterByOrigin, resetFilters } from '../../redux/actions/filterActions'
+import { NameFilter } from '../../components/index'
 import styles from './filters.module.css'
 
 export default function Filters() {
@@ -28,28 +29,30 @@ export default function Filters() {
   const games = useSelector(state => state.gamesCopy)
 
   useEffect(() => {
-    if (search.name === '') {
-      dispatch(getAllGames())
-    } else {
-      dispatch(getAllGames(search.name))
-    }
-  }, [search.name])
+    dispatch(getAllGames())
+  }, [])
 
   useEffect(() => {
     if (search.sortBy) {
       dispatch(sortBy(search.sortBy))
     } else if (search.genre || search.platform) {
       dispatch(filterBy(search.genre, search.platform))
-    } else if (search.isCreated) {
-      dispatch(filterByOrigin(search.isCreated))
     }
-  }, [search])
+  }, [search, dispatch])
 
   // === Handlers ===
   const handleChange = (e) => {
     const value = e.target.value
     const name = e.target.name
     setSearch(values => ({ ...values, [name]: value }))
+  }
+
+  const handleFilterByOrigin = () => {
+    setSearch({
+      ...search,
+      isCreated: !search.isCreated
+    })
+    dispatch(filterByOrigin(search.isCreated))
   }
 
   const handleReset = () => {
@@ -61,8 +64,9 @@ export default function Filters() {
     <>
       <div className={styles.filters}>
         {/* === Name input === */}
-        <input type="text" name="name" onChange={handleChange}
-          autoComplete='off' value={search.name} placeholder='Videogame...'/>
+        {/* <input type="text" name="name" onChange={handleChange}
+          autoComplete='off' value={search.name} placeholder='Videogame...' /> */}
+        <NameFilter search={search} setSearch={setSearch}/>
 
         {/* === Filter by genre === */}
         <label htmlFor="">genre</label>
@@ -78,7 +82,7 @@ export default function Filters() {
         <select name="platform" value={search.platform} onChange={handleChange}>
           <option value="All">All</option>
           {platformsOptions && platformsOptions.map((p) => (
-            <option key={p.id}  value={p.name}>{p.name}</option>
+            <option key={p.id} value={p.name}>{p.name}</option>
           ))}
         </select>
 
@@ -96,10 +100,7 @@ export default function Filters() {
         {/* === Filter by origin === */}
         <div className={styles.checkoption}>
           <label htmlFor="">Created</label>
-          {<button onClick={() => setSearch({
-            ...search,
-            isCreated: !search.isCreated
-          })} className={styles.originbtn}><FontAwesomeIcon icon={search.isCreated ? faCheck : faXmark} /></button>}
+          {<button onClick={handleFilterByOrigin} className={styles.originbtn} type='button'><FontAwesomeIcon icon={search.isCreated ? faCheck : faXmark} /></button>}
         </div>
 
         <button onClick={handleReset} className={styles.filtersreset}>Reset</button>
