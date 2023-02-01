@@ -4,7 +4,6 @@ const { Op } = require('sequelize')
 const { dataFormatter } = require('../utils/adapters/dataFormater')
 const { dbDataFormater } = require('../utils/adapters/dbDataFormater')
 const { apiGameFormater } = require('../utils/adapters/apiGameFormater')
-const { dbGameFormater } = require('../utils/adapters/dbGameFormater')
 const { API_KEY } = process.env
 
 const getDbGames = async () => {
@@ -56,7 +55,7 @@ const getGameById = async (id) => {
             const apiGame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
             return apiGameFormater(apiGame.data)
         } else {
-            const dbGame = Videogame.findOne({
+            const dbGame = await Videogame.findOne({
                 where: { id: id },
                 include: [Genre, Platform]
             })

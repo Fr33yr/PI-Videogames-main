@@ -1,6 +1,5 @@
 const apiGameFormater = (obj) => {
-    let platforms = obj.platforms && obj.platforms.map(p => p.platform.name)
-    let genres = obj.genres && obj.genres.map(g => g.name)
+    let platforms = obj.platforms && obj.platforms.map(p => p.platform)
     return {
         id: obj.id,
         name: obj.name,
@@ -9,7 +8,7 @@ const apiGameFormater = (obj) => {
         image: obj.background_image,
         rating: obj.rating,
         platforms: platforms,
-        genres: genres
+        genres: obj.genres
     }
 }
 
