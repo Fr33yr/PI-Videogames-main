@@ -1,7 +1,10 @@
 const { Videogame, Genre, Platform } = require('../db')
 const axios = require('axios')
 const { Op } = require('sequelize')
-const { dataFormatter } = require('../utils/dataFormater')
+const { dataFormatter } = require('../utils/adapters/dataFormater')
+const { dbDataFormater } = require('../utils/adapters/dbDataFormater')
+const { apiGameFormater } = require('../utils/adapters/apiGameFormater')
+const { dbGameFormater } = require('../utils/adapters/dbGameFormater')
 const { API_KEY } = process.env
 
 const getDbGames = async () => {
@@ -9,7 +12,7 @@ const getDbGames = async () => {
         const allgames = await Videogame.findAll({
             include: [Genre, Platform]
         })
-        return allgames
+        return dbDataFormater(allgames)
     } catch (error) {
         console.log(error)
     }
@@ -26,7 +29,6 @@ const getAPIGames = async () => {
 
         const response = await Promise.all(urls.map((url) => axios.get(url)))
             .then(res => res.map(obj => obj.data.results).flat())
-        //.then(res => res.reduce( (acc, element) => acc = [ ...acc, ...element.data.results], []))
 
         return dataFormatter(response)
     } catch (error) {
@@ -48,9 +50,21 @@ const getGamesByName = async (name) => {
 }
 
 const getGameById = async (id) => {
-    const game = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-
-    return game.data
+    let pattern = /^\d+$/
+    try {
+        if (pattern.test(id)) {
+            const apiGame = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+            return apiGameFormater(apiGame.data)
+        } else {
+            const dbGame = Videogame.findOne({
+                where: { id: id },
+                include: [Genre, Platform]
+            })
+            return dbGame
+        }
+    } catch (error) {
+        return error
+    }
 }
 
 const createGame = async (props) => {
