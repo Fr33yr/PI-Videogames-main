@@ -5,6 +5,7 @@ export { default as Card } from './card/Card';
 export { default as CardsContainer } from './cardscontainer/CardsContainer';
 export { default as NetworkError } from './errors/NetworkError';
 export { default as Filters } from './filters/Filters';
+export { default as NameFilter } from './filters/NameFilter';
 export { default as Form } from './form/Form';
 export { default as Date } from './form/inputs/Date';
 export { default as Desciption } from './form/inputs/Desciption';
