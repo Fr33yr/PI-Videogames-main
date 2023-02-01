@@ -8,7 +8,7 @@ const dbDataFormater = (arr) => {
             name: game.name,
             image: game.image,
             genres: genres,
-            platform: platform,
+            platforms: platform,
             rating: game.rating,
             released: game.releaseDate,
             created: game.created,
