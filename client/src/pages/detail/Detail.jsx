@@ -19,7 +19,8 @@ export default function Detail() {
   return (
     <>
       <div className={styles.detailscontainer}>
-        <img src={detail.background_image ? detail.background_image : "Image not found"} alt="" />
+        <img src={detail.image ? detail.image : "Image not found"} alt={`${detail.name}-image`} 
+        width={800} height={600}/>
         <h4>{detail.name}</h4>
         <p>Genres:</p>
         {detail.genres && detail.genres.map((g, index) => (
@@ -27,9 +28,9 @@ export default function Detail() {
         ))}
         <p>Platforms: </p>
         {detail.platforms && detail.platforms.map((p, index) => (
-          <p key={index + 2}>{p.platform.name}</p>
+          <p key={index + 2}>{p.name}</p>
         ))}
-        <p>Realesed: {detail.released}</p>
+        <p>Realesed: {detail.releaseDate}</p>
         <>
           {detail.description}
         </>
