@@ -4,7 +4,9 @@ import styles from './home.module.css'
 export default function Home() {
   return (
     <>
-      <Link to={'/games'}>Videogames</Link>
+      <div className={styles.home}>
+        <Link to={'/games'} className={styles.homelink}>Videogames</Link>
+      </div>
     </>
   )
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { getAllGames } from '../../redux/actions/gamesActions'
-import { sortBy, filterByOrigin, resetFilters, getPlatforms, getGenres } from '../../redux/actions/filterActions'
+import { resetFilters, getPlatforms, getGenres } from '../../redux/actions/filterActions'
 import { NameFilter, PlatformGenreFilter, SortFilter, OriginFilter } from '../../components/index'
 import styles from './filters.module.css'
 

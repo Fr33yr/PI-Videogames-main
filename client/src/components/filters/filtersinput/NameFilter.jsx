@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
 import { getAllGames } from '../../../redux/actions/gamesActions'
+import styles from '../filters.module.css'
 
 function NameFilter({ search, setSearch }) {
     const dispatch = useDispatch()
@@ -24,7 +25,7 @@ function NameFilter({ search, setSearch }) {
         <>
             <input type="text" name="name" onChange={handleChange}
                 autoComplete='off' value={search.name} placeholder='Videogame...' />
-            <button type='button' onClick={handleClick}>Find</button>
+            <button type='button' onClick={handleClick} className={styles.findbtn}>Find</button>
         </>
     )
 }
