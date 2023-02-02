@@ -19,4 +19,16 @@ const getAllGenres = async () => {
     return allGenres
 }
 
-module.exports = { getAllGenres, getApiGenres }
+const createGenre = async (name) => {
+    try {
+        const genre = await Genre.create({
+            name
+        })
+    
+        return genre   
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = { getAllGenres, getApiGenres, createGenre }

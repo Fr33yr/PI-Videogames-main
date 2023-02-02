@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const {Allgenres} = require('../handlers/genreHandlers')
+const {createNewGenre} = require('../handlers/genreHandlers')
 const {Allplataforms} = require('../handlers/plataformHandlers')
 const { getAll, getById, createNewGame, updateGame, deleteGame } = require('../handlers/videoGamesHandlers')
 // Importar todos los routers;
@@ -18,6 +19,7 @@ router.put('/games', updateGame)
 router.delete('/games/:id', deleteGame)
 
 router.get('/genres', Allgenres)
+router.post('/genres', createNewGame)
 
 router.get('/platforms', Allplataforms)
 

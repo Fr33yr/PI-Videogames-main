@@ -1,4 +1,4 @@
-const { getAllGenres } = require('../controllers/genreControllers')
+const { getAllGenres, createGenre } = require('../controllers/genreControllers')
 
 const Allgenres = async (req, res) => {
     try {
@@ -10,4 +10,14 @@ const Allgenres = async (req, res) => {
     }
 }
 
-module.exports = { Allgenres }
+const createNewGenre = async (req, res) =>{
+    const {name} = req.body
+    try {
+        await createGenre(name)
+        res.status(200).json({message: 'succes!'})
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+module.exports = { Allgenres, createNewGenre }
