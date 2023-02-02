@@ -15,7 +15,7 @@ router.get('/games', getAll)
 router.get('/games/:id', getById)
 router.post('/games', createNewGame)
 router.put('/games', updateGame)
-router.delete('/games', deleteGame)
+router.delete('/games/:id', deleteGame)
 
 router.get('/genres', Allgenres)
 
