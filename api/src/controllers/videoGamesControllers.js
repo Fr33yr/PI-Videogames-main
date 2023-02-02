@@ -106,14 +106,24 @@ const updateRow = async (props) =>{
             where:{name: name},
             include: [Genre, Platform]
         })
+
+        // relacion entre las tablas
+        let dbGenre = await Genre.findAll({
+            where: { name: genres }
+        })
+
+        let dbPlatforms = await Platform.findAll({
+            where: { name: platforms }
+        })
+
+        game.addGenres(dbGenre)
+        game.addPlatforms(dbPlatforms)
     
         game.set({
             name,
-            genres,
             description,
             releaseDate,
             rating,
-            platforms,
             image
         })
     
