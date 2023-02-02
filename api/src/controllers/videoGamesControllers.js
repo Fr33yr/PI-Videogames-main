@@ -96,4 +96,33 @@ const createGame = async (props) => {
     }
 }
 
-module.exports = { getAllGames, getGameById, getGamesByName, createGame, getAPIGames }
+const updateRow = async (props) =>{
+    try {
+        const { name, genres, description, releaseDate,
+            rating, platforms, image
+        } = props
+    
+        const game = await Videogame.findOne({
+            where:{name: name},
+            include: [Genre, Platform]
+        })
+    
+        game.set({
+            name,
+            genres,
+            description,
+            releaseDate,
+            rating,
+            platforms,
+            image
+        })
+    
+        await game.save()
+    
+        return 'success!'
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = { getAllGames, getGameById, getGamesByName, createGame, getAPIGames, updateRow }

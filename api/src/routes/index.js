@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const {Allgenres} = require('../handlers/genreHandlers')
 const {Allplataforms} = require('../handlers/plataformHandlers')
-const { getAll, getById, createNewGame } = require('../handlers/videoGamesHandlers')
+const { getAll, getById, createNewGame, updateGame } = require('../handlers/videoGamesHandlers')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -12,8 +12,9 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/games', getAll)
-router.post('/games', createNewGame)
 router.get('/games/:id', getById)
+router.post('/games', createNewGame)
+router.put('/games', updateGame)
 
 router.get('/genres', Allgenres)
 
