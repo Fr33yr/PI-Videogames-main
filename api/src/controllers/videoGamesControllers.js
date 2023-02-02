@@ -125,4 +125,16 @@ const updateRow = async (props) =>{
     }
 }
 
-module.exports = { getAllGames, getGameById, getGamesByName, createGame, getAPIGames, updateRow }
+const deleteRow = async (id) =>{
+    try {
+        const game = await Videogame.findByPk(id)
+
+        await game.destroy()
+
+        return 'success!'
+    } catch (error) {
+        return error
+    }
+}
+
+module.exports = { getAllGames, getGameById, getGamesByName, createGame, getAPIGames, updateRow, deleteRow }

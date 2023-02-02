@@ -1,4 +1,4 @@
-const { getAllGames, getGamesByName, getGameById, createGame, updateGame, updateRow } = require('../controllers/videoGamesControllers')
+const { getAllGames, getGamesByName, getGameById, createGame, updateRow, deleteRow } = require('../controllers/videoGamesControllers')
 const { Videogame } = require('../db')
 
 const getAll = async (req, res) => {
@@ -55,4 +55,15 @@ const updateGame = async (req, res) => {
     }
 }
 
-module.exports = { getAll, getById, createNewGame, updateGame }
+const deleteGame = async (req, res) => {
+    const { id } = req.params
+    try {
+        const response = await deleteRow(id)
+
+        res.status(200).json({ message: 'Succes!' })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+module.exports = { getAll, getById, createNewGame, updateGame, deleteGame }
