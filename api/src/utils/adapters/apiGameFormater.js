@@ -4,7 +4,7 @@ const apiGameFormater = (obj) => {
         id: obj.id,
         name: obj.name,
         description: obj.description,
-        releasedDate: obj.released,
+        releaseDate: obj.released,
         image: obj.background_image,
         rating: obj.rating,
         platforms: platforms,
