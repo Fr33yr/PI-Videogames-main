@@ -19,7 +19,7 @@ router.put('/games', updateGame)
 router.delete('/games/:id', deleteGame)
 
 router.get('/genres', Allgenres)
-router.post('/genres', createNewGame)
+router.post('/genres', createNewGenre)
 
 router.get('/platforms', Allplataforms)
 
