@@ -54,8 +54,20 @@
     border: 2px solid gray;
 }
 
+.namesearch{
+    display: flex;
+    flex-direction: row;
+}
+
+.namesearch input{
+    width: 6.4rem;
+}
+
 .findbtn{
     background-color: transparent;
+    padding: .15rem .2rem;
+    width: fit-content;
+    height: fit-content;
 }
 
 .findbtn:hover{

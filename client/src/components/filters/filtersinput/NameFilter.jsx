@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
+
 import { getAllGames } from '../../../redux/actions/gamesActions'
 import styles from '../filters.module.css'
 
@@ -23,9 +26,13 @@ function NameFilter({ search, setSearch }) {
 
     return (
         <>
-            <input type="text" name="name" onChange={handleChange}
-                autoComplete='off' value={search.name} placeholder='Videogame...' />
-            <button type='button' onClick={handleClick} className={styles.findbtn}>Find</button>
+            <div className={styles.namesearch}>
+                <input type="text" name="name" onChange={handleChange}
+                    autoComplete='off' value={search.name} placeholder='Videogame...' />
+                <button type='button' onClick={handleClick} className={styles.findbtn}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
+            </div>
         </>
     )
 }
