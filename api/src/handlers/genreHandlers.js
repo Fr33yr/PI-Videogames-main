@@ -14,7 +14,7 @@ const createNewGenre = async (req, res) =>{
     const {name} = req.body
     try {
         await createGenre(name)
-        res.status(200).json({message: 'succes!'})
+        res.status(200).json({message: 'genre created!'})
     } catch (error) {
         res.status(400).json({error: error.message})
     }

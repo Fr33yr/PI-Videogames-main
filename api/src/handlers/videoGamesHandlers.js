@@ -1,5 +1,4 @@
 const { getAllGames, getGamesByName, getGameById, createGame, updateRow, deleteRow } = require('../controllers/videoGamesControllers')
-const { Videogame } = require('../db')
 
 const getAll = async (req, res) => {
     const { name } = req.query
@@ -38,7 +37,7 @@ const createNewGame = async (req, res) => {
         if (response.errors && response.errors[0].message == 'name most be unique') {
             throw new Error('name most be unique')
         }
-        res.status(201).json({ message: 'Succes!' })
+        res.status(201).json({ message: 'Videogame create succesfully!' })
 
     } catch (error) {
         res.status(400).json({ error: error.message })

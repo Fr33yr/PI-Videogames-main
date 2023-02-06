@@ -88,9 +88,6 @@ const createGame = async (props) => {
 
         newGame.addGenres(dbGenre)
         newGame.addPlatforms(dbPlatforms)
-
-        return 'exito'
-
     } catch (error) {
         return error
     }
@@ -129,7 +126,7 @@ const updateRow = async (props) =>{
     
         await game.save()
     
-        return 'success!'
+        return 'updated succesfuly!'
     } catch (error) {
         return error
     }
@@ -141,7 +138,7 @@ const deleteRow = async (id) =>{
 
         await game.destroy()
 
-        return 'success!'
+        return 'succesfuly deleted!'
     } catch (error) {
         return error
     }
