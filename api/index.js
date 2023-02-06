@@ -22,7 +22,7 @@ const { getApiGenres } = require('./src/controllers/genreControllers.js');
 const { getApiPlataforms } = require('./src/controllers/plataformContollers.js');
 const { conn } = require('./src/db.js');
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   getApiPlataforms()
   getApiGenres()
   server.listen(3001, () => {
