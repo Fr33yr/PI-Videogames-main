@@ -5,8 +5,15 @@
     width: 100vw;
     justify-content: center;
     align-items: center;
+    padding: 30vh 0;
 }
 
 .home a{
-    margin-left: 40rem;
+    margin: 0 50vw;
+    padding: 0 2rem;
+    font-size: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+    width: fit-content;
 }
