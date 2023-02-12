@@ -13,7 +13,7 @@ export default function Videogames() {
   const dispatch = useDispatch()
 
   const games = useSelector(state => state.gamesCopy)
-  const errorState = useSelector (state => state.error)
+  const errorState = useSelector(state => state.error)
   let pages = Paginate(games, 15, 15)
 
   useEffect(() => {
@@ -21,16 +21,23 @@ export default function Videogames() {
     !games || games.length === 0 ? setLoading(true) : setLoading(false)
   }, [games])
 
+  if (errorState.message === 'Network Error') {
+    return (
+      <>
+        <NetworkError />
+      </>
+    )
+  }
+
   return (
     <>
-      {loading && !errorState ? <Loader /> :
+      {loading? <Loader /> :
         <div className={styles.videogames}>
           <Filters />
           <div className={styles.cards}>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
               nPages={Array.isArray(pages[0]) ? pages.length - 1 : 0} />
 
-            {errorState.message === 'Network Error' && <NetworkError />}
             {Array.isArray(pages[0]) ? <CardsContainer games={pages[currentPage]} /> : <CardsContainer games={pages} />}
 
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage}
